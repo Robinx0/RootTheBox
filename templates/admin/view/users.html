@@ -21,9 +21,9 @@
     {% end %}
     {% set avatars = filter_avatars(dir) %}
     {% set existing = existing_avatars("team") %}
-    <div id="change-team-avatar-modal" class="modal hide fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
+    <div id="change-team-avatar-modal" class="modal fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
         <div class="modal-header">
-            <button id="team-avatar-form" type="button" class="close" data-dismiss="modal">&times;</button>
+            <button id="team-avatar-form" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{{_("Change")}} {% if options.teams %}{{_("Team")}} {% end %}{{_("Avatar")}}</h3>
         </div>
         <div class="modal-body">
@@ -31,28 +31,28 @@
                 {% raw xsrf_form_html() %}
                     {% for avatar in avatars[::3] %}
                         <div class="row">
-                            <div class="span3" style="position: relative;">
-                                <center>
+                            <div class="col-md-3" style="position: relative;">
+                                <div class="text-center">
                                     {% if avatar in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                    <a href="#" class="teamavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-polaroid" style="width: 200px;"></a>
-                                </center>
+                                    <a href="#" class="teamavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                </div>
                             </div>
                             {% if avatars.index(avatar) + 1 < len(avatars) %}
                                 {% set avatar1 = avatars[avatars.index(avatar) + 1] %}
-                                <div class="span3" style="position: relative;">
-                                    <center>
+                                <div class="col-md-3" style="position: relative;">
+                                    <div class="text-center">
                                         {% if avatar1 in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                        <a href="#" class="teamavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-polaroid" style="width: 200px;"></a>
-                                    </center>
+                                        <a href="#" class="teamavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                    </div>
                                 </div>
                             {% end %}
                             {% if avatars.index(avatar) + 2 < len(avatars) %}
                                 {% set avatar2 = avatars[avatars.index(avatar) + 2] %}
-                                <div class="span3" style="position: relative;">
-                                    <center>
+                                <div class="col-md-3" style="position: relative;">
+                                    <div class="text-center">
                                         {% if avatar2 in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                        <a href="#" class="teamavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-polaroid" style="width: 200px;"></a>
-                                    </center>
+                                        <a href="#" class="teamavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                    </div>
                                 </div>
                             {% end %}
                         </div>
@@ -63,9 +63,9 @@
     </div>
     {% set avatars = filter_avatars("user") %}
     {% set existing = existing_avatars("user") %}
-    <div id="change-user-avatar-modal" class="modal hide fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
+    <div id="change-user-avatar-modal" class="modal fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
         <div class="modal-header">
-            <button id="user-avatar-form" type="button" class="close" data-dismiss="modal">&times;</button>
+            <button id="user-avatar-form" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{{_("Change")}} {% if options.teams %}{{_("Player")}} {% end %}{{_("Avatar")}}</h3>
         </div>
         <div class="modal-body">
@@ -73,28 +73,28 @@
                 {% raw xsrf_form_html() %}
                 {% for avatar in avatars[::3] %}
                         <div class="row">
-                            <div class="span3" style="position: relative;">
-                                <center>
+                            <div class="col-md-3" style="position: relative;">
+                                <div class="text-center">
                                     {% if avatar in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                    <a href="#" class="useravatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-polaroid" style="width: 200px;"></a>
-                                </center>
+                                    <a href="#" class="useravatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                </div>
                             </div>
                             {% if avatars.index(avatar) + 1 < len(avatars) %}
                                 {% set avatar1 = avatars[avatars.index(avatar) + 1] %}
-                                <div class="span3" style="position: relative;">
-                                    <center>
+                                <div class="col-md-3" style="position: relative;">
+                                    <div class="text-center">
                                         {% if avatar1 in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                        <a href="#" class="useravatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-polaroid" style="width: 200px;"></a>
-                                    </center>
+                                        <a href="#" class="useravatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                    </div>
                                 </div>
                             {% end %}
                             {% if avatars.index(avatar) + 2 < len(avatars) %}
                                 {% set avatar2 = avatars[avatars.index(avatar) + 2] %}
-                                <div class="span3" style="position: relative;">
-                                    <center>
+                                <div class="col-md-3" style="position: relative;">
+                                    <div class="text-center">
                                         {% if avatar2 in existing %}<i class="fa fa-certificate avatarused"></i><i class="fa fa-certificate avatarused-top"></i>{% end %}
-                                        <a href="#" class="useravatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-polaroid" style="width: 200px;"></a>
-                                    </center>
+                                        <a href="#" class="useravatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-thumbnail" style="width: 200px;"></a>
+                                    </div>
                                 </div>
                             {% end %}
                         </div>
@@ -105,60 +105,60 @@
         </div>
     </div>
     <!-- Edit Team -->
-    <div id="edit-team-modal" class="modal hide fade" style="display: none; ">
+    <div id="edit-team-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-fw fa-pencil"></i>
                 {% if options.teams %}{{_("Edit")}} {{_("Team")}}{% else %}{{_("Edit")}} {{_("Player")}}{% end %}
             </h3>
         </div>
         <div class="modal-body">
-            <form id="edit-team-form" class="form-horizontal" method="post" action="/admin/users/edit/team" enctype="multipart/form-data">
+            <form id="edit-team-form" method="post" action="/admin/users/edit/team" enctype="multipart/form-data">
                 {% raw xsrf_form_html() %}
                 <input id="team-uuid" name="uuid" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="team-name">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %} {{_("Name")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-name">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %} {{_("Name")}}</label>
                     <div class="controls">
                         <input required id="team-name" name="name" maxlength="24" type="text" placeholder="{{_('Team Name')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="team-motto">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %} {{_("Motto")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-motto">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %} {{_("Motto")}}</label>
                     <div class="controls">
                         <input required id="team-motto" name="motto" maxlength="32" type="text" placeholder="{{_('Team Motto')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="team-money">{% if options.banking %}{{_("Bank Account")}}{% else %}{{_("Score")}}{% end %}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-money">{% if options.banking %}{{_("Bank Account")}}{% else %}{{_("Score")}}{% end %}</label>
                     <div class="controls">
                         <input required id="team-money" name="money" type="number" placeholder="{% if options.banking %}{{_('Bank Account')}}{% else %}{{_('Score')}}{% end %}">
                     </div>
                 </div>
                 {% if options.teams %}
-                 <div class="control-group">
-                    <label class="control-label" for="team-notes">{{_("Admin Notes")}}</label>
+                 <div class="mb-3">
+                    <label class="form-label" for="team-notes">{{_("Admin Notes")}}</label>
                     <div class="controls">
                         <textarea id="team-notes" name="notes" type="text" placeholder="{{_('Optional')}}" maxlength="512"></textarea>
                     </div>
                 </div>
                 {% end %}
-                <div class="control-group">
-                    <label class="control-label">
+                <div class="mb-3">
+                    <label class="form-label">
                             <input id="team-avatar" name="avatar" type="hidden" value="" />
                             (w500 x h250)<br/>
-                            {% if len(avatars) > 0 %}<a data-toggle="modal" class="btn btn-primary" href="#change-team-avatar-modal"> {{_("Select New Avatar")}} </a><br/><br/>{% end %}
+                            {% if len(avatars) > 0 %}<a data-bs-toggle="modal" class="btn btn-primary" href="#change-team-avatar-modal"> {{_("Select New Avatar")}} </a><br/><br/>{% end %}
                             <a id="teamuploadbutton" class="btn btn-primary" href="#">{{_("Upload Avatar")}}</a>
                             <input id="team-file-avatar" name="avatarfile" type="file" style="display: none;"/>
                     </label>
                     <div class="controls">
-                            <img id="team-avatarimg" src="" class="img-polaroid" style="width: 210px; height: 105px; object-fit: cover"/>
+                            <img id="team-avatarimg" src="" class="img-thumbnail" style="width: 210px; height: 105px; object-fit: cover"/>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="edit-team-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
@@ -166,40 +166,40 @@
         </div>
     </div>
     <!-- Edit User -->
-    <div id="edit-user-modal" class="modal hide fade" style="display: none; ">
+    <div id="edit-user-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-fw fa-pencil"></i>
                 {{_("Edit User")}}
             </h3>
         </div>
         <div class="modal-body">
-            <form id="edit-user-form" class="form-horizontal" method="post" action="/admin/users/edit/user" enctype="multipart/form-data">
+            <form id="edit-user-form" method="post" action="/admin/users/edit/user" enctype="multipart/form-data">
                 {% raw xsrf_form_html() %}
                 <input id="user-uuid" name="uuid" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="user-handle">{{_("Handle")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-handle">{{_("Handle")}}</label>
                     <div class="controls">
                       <input id="user-handle" name="handle" type="text" maxlength="16" minlength="3" placeholder="{{_('Handle')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="user-name">{{_("Name")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-name">{{_("Name")}}</label>
                     <div class="controls">
                       <input id="user-name" name="name" type="text" maxlength="64" placeholder="{{_('Name')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="user-email">{{_("Email")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-email">{{_("Email")}}</label>
                     <div class="controls">
                       <input id="user-email" name="email" type="text" maxlength="64" placeholder="{{_('Email')}}">
                     </div>
                 </div>
                 {% if options.banking %}
                 <div id="banking-group">
-                    <div class="control-group">
-                        <label class="control-label" for="user-hash-algorithm">{{_("Bank Hash Algorithm")}}</label>
+                    <div class="mb-3">
+                        <label class="form-label" for="user-hash-algorithm">{{_("Bank Hash Algorithm")}}</label>
                         <div class="controls">
                             <select id="user-hash-algorithm" name="hash_algorithm">
                                 <option value="md5">MD5</option>
@@ -209,22 +209,22 @@
                             </select>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="bank-password">{{_("Bank Password")}}</label>
+                    <div class="mb-3">
+                        <label class="form-label" for="bank-password">{{_("Bank Password")}}</label>
                         <div class="controls">
                             <input id="bank-password" name="bank_password" type="password" placeholder="{{_('New Bank Password')}}" maxlength="{{ options.max_password_length }}">
                         </div>
                     </div>
                 </div>
                 {% end %}
-                <div class="control-group">
-                    <label class="control-label" for="user-password">{{_("Account Password")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-password">{{_("Account Password")}}</label>
                     <div class="controls">
                         <input id="user-password" name="password" type="password" placeholder="{{_('New Password')}}" minlength="{{ options.min_user_password_length}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="user-admin">{{_("Role")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-admin">{{_("Role")}}</label>
                     <div class="controls">
                         <select id="user-admin" name="admin">
                             <option value=false>{{_("Player")}}</option>
@@ -233,8 +233,8 @@
                     </div>
                 </div>
                 {% if options.teams %}
-                <div class="control-group">
-                    <label class="control-label" for="user-team-uuid">{{_("Team")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-team-uuid">{{_("Team")}}</label>
                     <div class="controls">
                         <select id="user-team-uuid" name="team_uuid">
                             <option value=""></option>
@@ -245,45 +245,45 @@
                     </div>
                 </div>
                 {% end %}
-                <div class="control-group">
-                    <label class="control-label" for="user-expire">{{_("Expire Account")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-expire">{{_("Expire Account")}}</label>
                     <div class="controls">
                         <input type="text" id="user-expire" name="expire" placeholder="{{_('Optional')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="user-notes">{{_("Admin Notes")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="user-notes">{{_("Admin Notes")}}</label>
                     <div class="controls">
                         <textarea id="user-notes" name="notes" type="text" placeholder="{{_('Optional')}}" maxlength="512"></textarea>
                     </div>
                 </div>
                 {% if options.teams %}
-                <div class="control-group">
-                    <label class="control-label">
+                <div class="mb-3">
+                    <label class="form-label">
                             <input id="user-avatar" name="avatar" type="hidden" value="" />
                             (w500 x h250)<br/>
-                            {% if len(avatars) > 0 %}<a data-toggle="modal" class="btn btn-primary" href="#change-user-avatar-modal"> {{_("Select New Avatar")}} </a><br/><br/>{% end %}
+                            {% if len(avatars) > 0 %}<a data-bs-toggle="modal" class="btn btn-primary" href="#change-user-avatar-modal"> {{_("Select New Avatar")}} </a><br/><br/>{% end %}
                             <a id="useruploadbutton" class="btn btn-primary" href="#">{{_("Upload Avatar")}}</a>
                             <input id="user-file-avatar" name="avatarfile" type="file" style="display: none;"/>
                     </label>
                     <div class="controls">
-                            <img id="user-avatarimg" src="" class="img-polaroid" style="width: 210px; height: 105px; object-fit: cover"/>
+                            <img id="user-avatarimg" src="" class="img-thumbnail" style="width: 210px; height: 105px; object-fit: cover"/>
                     </div>
                 </div>
                 {% end %}
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="edit-user-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
             </button>
         </div>
     </div>
-    <div id="delete-team-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-team-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-times-circle-o"></i> {% if options.teams %}{{_("Delete Team")}}{% else %}{{_("Delete Player")}}{% end %}</h3>
         </div>
         <div class="modal-body">
@@ -297,16 +297,16 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="delete-team-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete")}}
             </button>
         </div>
     </div>
-    <div id="delete-user-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-user-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-times-circle-o"></i> {{_("Delete User")}}</h3>
         </div>
         <div class="modal-body">
@@ -319,7 +319,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="delete-user-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete")}}
@@ -327,19 +327,19 @@
         </div>
     </div>
     <!-- Add score to all teams -->
-    <div id="edit-scores-modal" class="modal hide fade" style="display: none; ">
+    <div id="edit-scores-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-fw fa-plus"></i>
                 {{_("Add")}} {% if options.banking %}{{_("Money")}}{% else %}{{_("Points")}}{% end %}
             </h3>
         </div>
         <div class="modal-body">
-            <form id="edit-scores-form" class="form-horizontal" method="post" action="/admin/users/edit/teams/scores" enctype="multipart/form-data">
+            <form id="edit-scores-form" method="post" action="/admin/users/edit/teams/scores" enctype="multipart/form-data">
                 {% raw xsrf_form_html() %}
-                <div class="control-group">
-                    <label class="control-label" for="team-money-uuid">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-money-uuid">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %}</label>
                     <div class="controls">
                         <select id="team-money-uuid" name="team_uuid">
                             <option value="all">All</option>
@@ -349,14 +349,14 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="team-money-add">{% if options.banking %}{{_("Money")}}{% else %}{{_("Points")}}{% end %} {{_("to Add")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-money-add">{% if options.banking %}{{_("Money")}}{% else %}{{_("Points")}}{% end %} {{_("to Add")}}</label>
                     <div class="controls">
                         <input id="team-money-add" name="money" type="number" placeholder="{% if options.banking %}{{_('Money')}}{% else %}{{_('Points')}}{% end %} {{_('to Add or Subtract')}}">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="team-message-add">{{_("Notification Message")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="team-message-add">{{_("Notification Message")}}</label>
                     <div class="controls">
                         <input id="team-message-add" name="message" type="text" value="{{ _('Your score has been updated') }}">
                     </div>
@@ -364,7 +364,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="edit-scores-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
@@ -382,20 +382,20 @@
         <input id="lock-user-uuid" name="uuid" type="hidden" />
     </form>
     <!-- Start Visible -->
-    <div class="row-fluid">
-        <div class="span10 offset1">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
             <h1>
                 <i class="fa fa-fw fa-group"></i>
                 {{_("User Management")}}
-                <a style="float: right; margin-right: 5px; margin-top: 12px;" id="edit-scores-button" class="btn btn-small" data-toggle="modal" href="#edit-scores-modal">
+                <a style="float: right; margin-right: 5px; margin-top: 12px;" id="edit-scores-button" class="btn btn-sm" data-bs-toggle="modal" href="#edit-scores-modal">
                     <i class="fa fa-fw fa-plus"></i> {{_("add")}} {% if options.banking %}{{_("money")}}{% else %}{{_("points")}}{% end %}
                 </a>
             </h1>
             <br />
             {% if errors is not None and len(errors) != 0 %}
                 {% for error in errors %}
-                    <div class="alert alert-error">
-                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <div class="alert alert-danger">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <h4 class="alert-heading">{{_("ERROR")}}</h4>
                         {{ error }}
                     </div>
@@ -443,13 +443,13 @@
                                 {% end %}
                                 <td> {% if user.notes %}{{ user.notes }}{% end %} </td>
                                 <td class="shortcolumn">
-                                    <a id="edit-user-button-{{ user.uuid }}" class="btn btn-mini" data-toggle="modal" href="#edit-user-modal" data-uuid="{{ user.uuid }}">
+                                    <a id="edit-user-button-{{ user.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-user-modal" data-uuid="{{ user.uuid }}">
                                         <i class="fa fa-fw fa-pencil"></i>
                                         {{_("Edit Account")}}
                                     </a>
                                 </td>
                                 <td class="shortcolumn">
-                                    <a id="delete-user-button-{{ user.uuid }}" class="btn btn-mini btn-danger" data-toggle="modal" href="#delete-user-modal" data-uuid="{{ user.uuid }}">
+                                    <a id="delete-user-button-{{ user.uuid }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" href="#delete-user-modal" data-uuid="{{ user.uuid }}">
                                         <i class="fa fa-fw fa-times-circle-o"></i>
                                         {{_("Delete")}}
                                     </a>
@@ -468,11 +468,11 @@
                     <h4 style="display:inline;">
                         {% if options.banking %}{{_("$")}}{% end %}{{ team.money }}{% if not options.banking %} <span style="font-size: small;">{{_("points")}}</span>{% end %}
                     </h4>
-                    <a id="delete-team-button{{ team_index }}" class="btn btn-small btn-danger" data-toggle="modal" href="#delete-team-modal" data-uuid="{{ team.uuid }}" style="float:right;">
+                    <a id="delete-team-button{{ team_index }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" href="#delete-team-modal" data-uuid="{{ team.uuid }}" style="float:right;">
                         <i class="fa fa-fw fa-times-circle-o"></i>
                         {% if options.teams %}{{_("Delete Team")}}{% else %}{{_("Delete Player")}}{% end %}
                     </a>
-                    <a id="edit-team-button{{ team_index }}" class="btn btn-small" data-toggle="modal" href="#edit-team-modal" data-uuid="{{ team.uuid }}" style="float:right; margin-right:10px;">
+                    <a id="edit-team-button{{ team_index }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-team-modal" data-uuid="{{ team.uuid }}" style="float:right; margin-right:10px;">
                         <i class="fa fa-fw fa-pencil"></i>
                         {% if options.teams %}{{_("Edit Team")}}{% else %}{{_("Edit Player")}}{% end %}
                     </a>
@@ -533,31 +533,31 @@
                                     <td> {% if user.notes %}{{ user.notes }}{% end %} </td>
                                     <td class="shortcolumn">
                                         {% if user.locked %}
-                                            <a id="lock-user-button-{{ user.uuid }}" class="btn btn-mini btn-success" data-uuid="{{ user.uuid }}">
+                                            <a id="lock-user-button-{{ user.uuid }}" class="btn btn-sm btn-success" data-uuid="{{ user.uuid }}">
                                                 <i class="fa fa-fw fa-unlock"></i>
                                                 {{_("Unlock")}}
                                             </a>
                                         {% else %}
-                                            <a id="lock-user-button-{{ user.uuid }}" class="btn btn-mini btn-warning" data-uuid="{{ user.uuid }}">
+                                            <a id="lock-user-button-{{ user.uuid }}" class="btn btn-sm btn-warning" data-uuid="{{ user.uuid }}">
                                                 <i class="fa fa-fw fa-lock"></i>
                                                 {{_("Lock")}}
                                             </a>
                                         {% end %}
                                     </td>
                                     <td class="shortcolumn">
-                                        <a class="btn btn-mini" href="/user?id={{ user.uuid }}">
+                                        <a class="btn btn-sm" href="/user?id={{ user.uuid }}">
                                             <i class="fa fa-fw fa-bar-chart-o"></i>
                                             {{_("Statistics")}}
                                         </a>
                                     </td>
                                     <td class="shortcolumn">
-                                        <a id="edit-user-button-{{ user.uuid }}" class="btn btn-mini" data-toggle="modal" href="#edit-user-modal" data-uuid="{{ user.uuid }}" data-hash-algorithm="{{ user.algorithm }}" data-team-uuid="{{ user.team.uuid }}">
+                                        <a id="edit-user-button-{{ user.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-user-modal" data-uuid="{{ user.uuid }}" data-hash-algorithm="{{ user.algorithm }}" data-team-uuid="{{ user.team.uuid }}">
                                             <i class="fa fa-fw fa-pencil"></i>
                                             {{_("Edit Account")}}
                                         </a>
                                     </td>
                                     <td class="shortcolumn">
-                                        <a id="delete-user-button-{{ user.uuid }}" class="btn btn-mini btn-danger" data-toggle="modal" href="#delete-user-modal" data-uuid="{{ user.uuid }}">
+                                        <a id="delete-user-button-{{ user.uuid }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" href="#delete-user-modal" data-uuid="{{ user.uuid }}">
                                             <i class="fa fa-fw fa-times-circle-o"></i>
                                             {{_("Delete")}}
                                         </a>

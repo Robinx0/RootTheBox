@@ -11,8 +11,8 @@
     <br />
     {% if errors is not None and len(errors) != 0 %}
         {% for error in errors %}
-        <div class="alert alert-error">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <div class="alert alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <h4 class="alert-heading">{{ _("ERROR") }}</h4>
             {{ error }}
         </div>
@@ -20,16 +20,16 @@
     {% end %}
     {% if success is not None %}
     <div class="alert alert-success">
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <h4 class="alert-heading">{{ _("SUCCESS") }}</h4>
         {{ success }}
     </div>
     {% end %}
     <div class="well">
-        <form class="form-horizontal" action="/admin/reset" method="post">
+        <form action="/admin/reset" method="post">
             {% raw xsrf_form_html() %}
-            <div class="control-group">
-                <div class="controls">
+            <div class="mb-3">
+                <div>
                     <h3>{{ _("Reset Actions") }}</h3>
                     <ul>
                         <li>
@@ -50,8 +50,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="control-group">
-                <div class="controls">
+            <div class="mb-3">
+                <div>
                     <button class="btn btn-primary" type="submit">{{ _("Reset Game") }}</button>
                 </div>
             </div>

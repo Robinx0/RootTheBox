@@ -1,5 +1,5 @@
 body {
-    padding-top: 60px;
+    padding-top: 70px;
     padding-bottom: 40px;
 }
 footer {
@@ -7,12 +7,14 @@ footer {
     position: fixed;
     bottom: -30px;
     width: 100%;
+    z-index: 1000;
 }
 .footernav {
     padding: 5px 20px;
 }
-.img-polaroid {
-    width: 500px;
+.img-polaroid,
+.img-thumbnail {
+    max-width: 100%;
 }
 .shortcolumn {
     width: 1px;
@@ -20,7 +22,7 @@ footer {
 }
 .descriptioncol {
     white-space: pre-wrap;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     max-width: 350px;
 }
 .levelheader {
@@ -37,27 +39,29 @@ footer {
     vertical-align: middle  !important;
 }
 .wordbreak {
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
 .successtext {
     font-size: 225%;
-    color: green;
+    color: #77b300;
 }
 .disabledtext {
     font-size: 275%;
 }
 .avatarused {
-    color: white; 
-    font-size: 23pt; 
-    position: absolute; 
-    top: -11px; 
+    color: white;
+    font-size: 23pt;
+    position: absolute;
+    top: -11px;
     right: -5px;
+    z-index: 1;
 }
 .avatarused-top {
-    font-size: 16pt; 
-    position: absolute; 
-    top: -6px; 
+    font-size: 16pt;
+    position: absolute;
+    top: -6px;
     right: -1px;
+    z-index: 2;
 }
 
 .preformatted {
@@ -83,10 +87,24 @@ pre {
     font-size: unset !important;
     padding: 0px 6px 1px 5px !important;
     white-space: pre-wrap !important;
-
 }
 
 code {
     color: #f52323 !important;
     border: 1px solid #979797 !important;
+}
+
+/* BS5 card styling to match the old .well look */
+.card {
+    border-color: var(--bs-border-color);
+}
+
+/* Smooth transitions for interactive elements */
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Better table styling */
+.table > :not(caption) > * > * {
+    vertical-align: middle;
 }

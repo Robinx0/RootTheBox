@@ -9,13 +9,15 @@
 
 {% block modals %}
  <!-- Set Countdown Timer -->
- <div id="timer-modal" class="modal hide fade">
+ <div id="timer-modal" class="modal fade">
+    <div class="modal-dialog">
+    <div class="modal-content">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h3>
             <i class="fa fa-fw fa-clock-o"></i>
             {{ _("Set Countdown Timer") }}
         </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
     <form id="timer-form" method="post" action="/admin/game">
@@ -31,26 +33,30 @@
             <input name="stop_timer" type="checkbox" style="margin-top: -5px; margin-right: 5px;"> {{ _("Stop the game after timer ends") }}.
         </p>
     </div>
-        
-        
+
+
     </form>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+        <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
         <button id="timer-submit" class="btn btn-primary" type="button">
             <i class="fa fa-fw fa-save"></i>
             {{ _("Save") }}
         </button>
     </div>
+    </div>
+    </div>
 </div>
  <!-- Send Global Message -->
-<div id="message-modal" class="modal hide fade">
+<div id="message-modal" class="modal fade">
+    <div class="modal-dialog">
+    <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3>
                 <i class="fa fa-envelope"></i>
                 {{ _("Create Message") }}
             </h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
         <form id="message-form" method="post" action="/admin/message">
@@ -60,25 +66,27 @@
                 {{ _("Send a global notification to all players") }}:
             </p><textarea name="message" rows="10" cols="30" style="width: 425px;"></textarea>
         </div>
-            
+
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="message-submit" class="btn btn-primary" type="button">
                 <i class="fa fa-fw fa-save"></i>
                 {{ _("Send") }}
             </button>
         </div>
     </div>
+    </div>
+    </div>
 {% end %}
 
 {% block content %}
 {% from models.Notification import Notification %}
 {% from tornado.options import options %}
-<div class="row-fluid">
+<div class="row">
     <div class="row">
-        <div class="offset1">
+        <div class="offset-md-1">
             <h3 id="timercount" title="Scoreboard Countdown" style="float: right; color: red; margin-right: 150px;"></h3>
             <h1>
                 <i class="fa fa-home"></i>
@@ -87,9 +95,9 @@
             <br />
         </div>
     </div>
-    <div class="span3">
+    <div class="col-md-3">
         <div class="row">
-            <div class="span11 offset1 well">
+            <div class="col-md-11 offset-md-1 well">
                 <h3>{{ _("Game Control") }}</h3>
                 {% if not options.setup.startswith("docker") %}
                     <div id="gitstatus"></div>
@@ -129,19 +137,19 @@
                 <div class="game_button_area">
                     {% if not handler.application.settings['suspend_registration'] %}
                         <button id="suspend-registration-button" class="btn btn-warning game_button" type="button">
-                            <i class="fa fa-fw fa-pause"></i>  
+                            <i class="fa fa-fw fa-pause"></i>
                         </button>
                         <h4 class="game_button_text">{{ _("Pause Registration") }}</h4>
                     {% else %}
                         <button id="resume-registration-button" class="btn btn-success game_button" type="button">
-                            <i class="fa fa-fw fa-play"></i>  
+                            <i class="fa fa-fw fa-play"></i>
                         </button>
                         <h4 class="game_button_text">{{ _("Resume Registration") }}</h4>
                     {% end %}
                 </div>
                 <div class="game_button_area">
                     {% if not handler.application.settings['countdown_timer'] %}
-                        <button id="countdown-timer-button" class="btn btn-success game_button" data-toggle="modal" href="#timer-modal" type="button">
+                        <button id="countdown-timer-button" class="btn btn-success game_button" data-bs-toggle="modal" href="#timer-modal" type="button">
                             <i class="fa fa-fw fa-clock-o"></i>
                         </button>
                         <h4 class="game_button_text">{{ _("Set Countdown") }}</h4>
@@ -156,15 +164,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="span11 offset1 well">
+            <div class="col-md-11 offset-md-1 well">
                 <h3>{{_("Automatic Ban")}}</h3>
                 <hr />
                 <form action="/admin/ban/config" method="post">
                     {% raw xsrf_form_html() %}
-                    <div class="control-group">
-                        <div class="controls">
+                    <div class="mb-3">
+                        <div>
                             <input id="automatic-ban" name="automatic_ban" type="hidden" value="{{ str(handler.application.settings['automatic_ban']).lower() }}" />
-                            <div id="automatic-ban-button" class="btn-group" data-toggle="buttons-radio">
+                            <div id="automatic-ban-button" class="btn-group" data-bs-toggle="buttons-radio">
                                 <button id="automatic-ban-enable" type="button" class="btn btn-success">
                                     <i id="automatic-ban-enable-icon" class="fa fa-fw fa-square-o"></i>
                                     {{ _("Enable") }}
@@ -176,14 +184,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="threshold-size">{{ _("Threshold") }}</label>
-                        <div class="controls">
-                            <input id="threshold-size" type="text" name="threshold_size" value="{{ handler.application.settings['blacklist_threshold'] }}" />
+                    <div class="mb-3">
+                        <label class="form-label" for="threshold-size">{{ _("Threshold") }}</label>
+                        <div>
+                            <input id="threshold-size" type="text" name="threshold_size" class="form-control" value="{{ handler.application.settings['blacklist_threshold'] }}" />
                         </div>
                     </div>
-                    <div class="control-group">
-                        <div class="controls">
+                    <div class="mb-3">
+                        <div>
                             <button class="btn btn-primary" type="submit">
                                 <i class="fa fa-save"></i>
                                 {{ _("Save") }}
@@ -192,20 +200,20 @@
                     </div>
                 </form>
             </div>
-            
+
         </div>
     </div>
     {% if user.validate_password("rootthebox") %}
-    <div class="span8 alert alert-warning">
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <div class="col-md-8 alert alert-warning">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <h4 class="alert-heading">{{ _("WARNING") }}</h4>
         Default password - please update in <a href="/user/settings" style="color: #000">User Settings</a>
     </div>
     {% end %}
-    <div class="span8 well">
-        <div class="control-group" style="float: right; padding-top: 20px;">
-                <div class="controls">
-                    <button class="btn btn-primary" data-toggle="modal" href="#message-modal" type="button">
+    <div class="col-md-8 well">
+        <div class="mb-3" style="float: right; padding-top: 20px;">
+                <div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" href="#message-modal" type="button">
                         {{ _("Create Notification") }}
                     </button>
                 </div>
@@ -222,12 +230,12 @@
         <hr style="margin-bottom: 16px; margin-top: 16px;">
         {% for index, notify in enumerate(reversed(list(Notification.admin()[-6:]))) %}
             <div class="row">
-                <div class="span1">
+                <div class="col-md-1">
                     {% if notify.icon_url is not None %}
                         <img src="{{ notify.icon_url }}" style="width: 30px; float: right; padding-bottom: 10px" />
                     {% end %}
                 </div>
-                <div class="span11 msgdescription"  style="margin-left: 5px; padding-top: 5px;">
+                <div class="col-md-11 msgdescription"  style="margin-left: 5px; padding-top: 5px;">
                     <p>
                         <strong>{{ _(notify.title) }}</strong>
                         {{ notify.created.strftime("%I:%M%p %x") }}:&nbsp;&nbsp;{{ notify.message }}
@@ -239,7 +247,7 @@
             {% end %}
         {% end %}
     </div>
-    <div class="well span8">
+    <div class="well col-md-8">
         <h3>
             <i class="fa fa-warning"></i>
             {{ _("Failed Logins") }}
@@ -279,7 +287,7 @@
             </tbody>
         </table>
     </div>
-    <div class="well span8">
+    <div class="well col-md-8">
         <h3>
             <i class="fa fa-shield"></i>
             {{ _("Banned IPs") }}
@@ -301,6 +309,6 @@
                 {% end %}
             </tbody>
         </table>
-    </div>  
+    </div>
 </div>
 {% end %}

@@ -17,40 +17,44 @@
 {% from tornado.options import options %}
 {% set avatars = filter_avatars("box") %}
 <!-- Select Avatars -->
-<div id="change-box-avatar-modal" class="modal hide fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
+<div id="change-box-avatar-modal" class="modal fade" style="z-index: 100000; display: none;">
+    <div class="modal-dialog {% if len(avatars) > 0 %}modal-lg{% end %}">
+    <div class="modal-content">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h3>{{_("Change Avatar")}}</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
         {% raw xsrf_form_html() %}
-        <a id="avatarclose" href="#" class="btn" data-dismiss="modal" style="display: none;">{{_("Close")}}</a>
+        <a id="avatarclose" href="#" class="btn" data-bs-dismiss="modal" style="display: none;">{{_("Close")}}</a>
         {% for avatar in avatars[::3] %}
             <div class="row">
-                <div class="span3">
-                    <center>
-                        <a href="#" class="boxavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-polaroid" style="width: 200px;"></a>
-                    </center>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <a href="#" class="boxavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-thumbnail" style="width: 200px;"></a>
+                    </div>
                 </div>
                 {% if avatars.index(avatar) + 1 < len(avatars) %}
                     {% set avatar1 = avatars[avatars.index(avatar) + 1] %}
-                    <div class="span3">
-                        <center>
-                            <a href="#" class="boxavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-polaroid" style="width: 200px;"></a>
-                        </center>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <a href="#" class="boxavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-thumbnail" style="width: 200px;"></a>
+                        </div>
                     </div>
                 {% end %}
                 {% if avatars.index(avatar) + 2 < len(avatars) %}
                     {% set avatar2 = avatars[avatars.index(avatar) + 2] %}
-                    <div class="span3">
-                        <center>
-                            <a href="#" class="boxavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-polaroid" style="width: 200px;"></a>
-                        </center>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <a href="#" class="boxavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-thumbnail" style="width: 200px;"></a>
+                        </div>
                     </div>
                 {% end %}
             </div>
             <br/>
         {% end %}
+    </div>
+    </div>
     </div>
 </div>
 {% end %}
@@ -65,29 +69,29 @@
     <br />
     {% if errors is not None and len(errors) != 0 %}
         {% for error in errors %}
-        <div class="alert alert-error">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <div class="alert alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <h4 class="alert-heading">{{_("ERROR")}}</h4>
             {{ error }}
         </div>
         {% end %}
     {% end %}
     <div class="well">
-        <form class="form-horizontal" action="/admin/create/box" method="post" enctype="multipart/form-data" autocomplete="on">
+        <form action="/admin/create/box" method="post" enctype="multipart/form-data" autocomplete="on">
             {% raw xsrf_form_html() %}
-            <div class="control-group">
-                <label class="control-label" for="box_name">{{_("Box Name")}}</label>
-                <div class="controls">
-                    <input autofocus required id="box-name" name="name" maxlength="32" type="text" placeholder="{{_('Box Name')}}"
+            <div class="mb-3">
+                <label class="form-label" for="box_name">{{_("Box Name")}}</label>
+                <div>
+                    <input autofocus required id="box-name" name="name" maxlength="32" type="text" class="form-control" placeholder="{{_('Box Name')}}"
                            rel="popover"
                            data-original-title="{{_('Box Name')}}"
                            data-content="{{_('What is the name of this box?')}} [3-32 {{_('Characters')}}]">
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="game_level">{{_("Game Level")}}</label>
-                <div class="controls">
-                    <select id="game-level" name="game_level"
+            <div class="mb-3">
+                <label class="form-label" for="game_level">{{_("Game Level")}}</label>
+                <div>
+                    <select id="game-level" name="game_level" class="form-control"
                            rel="popover"
                            data-original-title="{{_('Game Level')}}"
                            data-content="{{_('Level to put box in?')}}">
@@ -97,10 +101,10 @@
                     </select>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="corporation">{{_("Corporation")}}</label>
-                <div class="controls">
-                    <select id="corporation" name="corporation_uuid"
+            <div class="mb-3">
+                <label class="form-label" for="corporation">{{_("Corporation")}}</label>
+                <div>
+                    <select id="corporation" name="corporation_uuid" class="form-control"
                             rel="popover"
                             data-original-title="{{_('Corporation')}}"
                             data-content="{{_('Corporation box belongs too?')}}">
@@ -110,10 +114,10 @@
                     </select>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="category">{{_("Category")}}</label>
-                <div class="controls">
-                    <select id="category" name="category_uuid"
+            <div class="mb-3">
+                <label class="form-label" for="category">{{_("Category")}}</label>
+                <div>
+                    <select id="category" name="category_uuid" class="form-control"
                             rel="popover"
                             data-original-title="{{_('Category')}}"
                             data-content="{{_('Category box belongs too?')}}">
@@ -124,11 +128,11 @@
                     </select>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="operating_system">{{_("System Type")}}</label>
-                <div class="controls">
+            <div class="mb-3">
+                <label class="form-label" for="operating_system">{{_("System Type")}}</label>
+                <div>
                     <input id="operating_system" name="operating_system" type="hidden" value="?" />
-                    <div id="operating-system" class="btn-group" data-toggle="buttons-radio"
+                    <div id="operating-system" class="btn-group" data-bs-toggle="buttons-radio"
                             rel="popover"
                             data-original-title="{{_('System Type')}}"
                             data-content="{{_('What type of system is this?')}}">
@@ -155,19 +159,19 @@
                     </div>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="reward">{% if options.banking %}{{_("Reward")}}{% else %}{{_("Points")}}{% end %}</label>
-                <div class="controls">
-                    <input id="reward" name="reward" type="number" pattern="[0-9]+" value="0" placeholder="{% if options.banking %}{{_('$')}} {{_('Reward')}}{% else %}{{_('Points')}}{% end %}"
+            <div class="mb-3">
+                <label class="form-label" for="reward">{% if options.banking %}{{_("Reward")}}{% else %}{{_("Points")}}{% end %}</label>
+                <div>
+                    <input id="reward" name="reward" type="number" pattern="[0-9]+" value="0" class="form-control" placeholder="{% if options.banking %}{{_('$')}} {{_('Reward')}}{% else %}{{_('Points')}}{% end %}"
                            rel="popover"
                            data-original-title="{% if options.banking %}{{_('Reward')}}{% else %}{{_('Points')}}{% end %}"
                            data-content="{{_('This is the amount awarded for completion of the box.')}}">
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="description">{{_("Description")}}</label>
-                <div class="controls">
-                    <textarea class="toolbar" id="description" style="width: 60%;" rows="5" name="description" maxlength="1024" placeholder="{{_('Description')}}"
+            <div class="mb-3">
+                <label class="form-label" for="description">{{_("Description")}}</label>
+                <div>
+                    <textarea class="toolbar form-control" id="description" style="width: 60%;" rows="5" name="description" maxlength="1024" placeholder="{{_('Description')}}"
                               rel="popover"
                               data-original-title="{{_('Description')}}"
                               data-html="true"
@@ -175,13 +179,13 @@
                     </textarea>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="flag_submission_type">
+            <div class="mb-3">
+                <label class="form-label" for="flag_submission_type">
                     {{_("Flag Submission Type")}}
                 </label>
-                <div class="controls">
+                <div>
                     <input id="flag_submission_type" name="flag_submission_type" type="hidden" value="CLASSIC" />
-                    <div id="flag-submission-type-button" class="btn-group" data-toggle="buttons-radio"
+                    <div id="flag-submission-type-button" class="btn-group" data-bs-toggle="buttons-radio"
                          rel="popover"
                          data-original-title="{{_('Flag Submission Type')}}"
                          data-html="true"
@@ -197,31 +201,31 @@
                     </div>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="difficulty">{{_("Difficulty")}}</label>
-                <div class="controls">
-                    <input id="difficulty" name="difficulty" maxlength="16" type="text" placeholder="({{_('Optional')}})"
+            <div class="mb-3">
+                <label class="form-label" for="difficulty">{{_("Difficulty")}}</label>
+                <div>
+                    <input id="difficulty" name="difficulty" maxlength="16" type="text" class="form-control" placeholder="({{_('Optional')}})"
                         rel="popover"
                         data-original-title="{{_('Box Difficulty')}}"
                         data-content="{{_('Whats the difficulty of the box?')}} [Max: 16 {{_('Characters')}}]">
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="avatar">{{_("Avatar")}}</label>
-                <div class="controls">
+            <div class="mb-3">
+                <label class="form-label" for="avatar">{{_("Avatar")}}</label>
+                <div>
                         <a id="uploadbutton" class="btn btn-primary" href="#">{{_("Upload Avatar")}}</a>
                         <input id="box-avatar" name="avatar" type="file" style="display: none;"/>
                         <input id="box_avatar_select" name="box_avatar_select" type="hidden" />
-                        {% if len(avatars) > 0 %}&nbsp;&nbsp;<a data-toggle="modal" class="btn btn-primary" href="#change-box-avatar-modal"> {{_("Choose Avatar")}} </a>{% end %}
+                        {% if len(avatars) > 0 %}&nbsp;&nbsp;<a data-bs-toggle="modal" class="btn btn-primary" href="#change-box-avatar-modal"> {{_("Choose Avatar")}} </a>{% end %}
                         &nbsp;&nbsp;<a id="removeavatar" class="btn btn-primary" href="#">{{_("No Avatar")}}</a>
                         <div id="avatarfilename" style="padding: 5px;"></div>
                 </div>
             </div>
             {% if options.story_mode %}
-            <div class="control-group">
-                <label class="control-label" for="capture-message">{{_("Completion Message")}}</label>
-                <div class="controls">
-                    <textarea class="toolbar" id="capture-message" name="capture_message" style="width: 60%;" rows="5" maxlength="1024" type="text" placeholder="({{_('Optional')}})"
+            <div class="mb-3">
+                <label class="form-label" for="capture-message">{{_("Completion Message")}}</label>
+                <div>
+                    <textarea class="toolbar form-control" id="capture-message" name="capture_message" style="width: 60%;" rows="5" maxlength="1024" type="text" placeholder="({{_('Optional')}})"
                             rel="popover"
                             data-original-title="{{_('Completion Message')}}"
                             data-content="{{_('This is the message displayed to the user once the box is completed.')}}" >
@@ -229,8 +233,8 @@
                 </div>
             </div>
             {% end %}
-            <div class="control-group">
-                <div class="controls">
+            <div class="mb-3">
+                <div>
                     <button class="btn btn-primary" type="submit">{{_("Create Box")}}</button>
                 </div>
             </div>

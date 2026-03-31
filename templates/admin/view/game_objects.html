@@ -28,34 +28,34 @@
         <input id="lock-box-uuid" name="uuid" type="hidden" />
     </form>
     <!-- Select Avatars -->
-    <div id="change-box-avatar-modal" class="modal hide fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
+    <div id="change-box-avatar-modal" class="modal fade" style="z-index: 100000; display: none; {% if len(avatars) > 0 %}width: 750px; margin-left: -375px;{% end %}">
         <div class="modal-header">
-            <button id="avatarclose" type="button" class="close" data-dismiss="modal">&times;</button>
+            <button id="avatarclose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{{ _("Change Avatar") }}</h3>
         </div>
         <div class="modal-body">
             {% raw xsrf_form_html() %}
             {% for avatar in avatars[::3] %}
                 <div class="row">
-                    <div class="span3">
-                        <center>
-                            <a href="#" class="boxavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-polaroid" style="width: 200px;"></a>
-                        </center>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <a href="#" class="boxavatarimg" value="{{avatar}}"><img src="/avatars/{{avatar}}"  class="img-thumbnail" style="width: 200px;"></a>
+                        </div>
                     </div>
                     {% if avatars.index(avatar) + 1 < len(avatars) %}
                         {% set avatar1 = avatars[avatars.index(avatar) + 1] %}
-                        <div class="span3">
-                            <center>
-                                <a href="#" class="boxavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-polaroid" style="width: 200px;"></a>
-                            </center>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <a href="#" class="boxavatarimg" value="{{avatar1}}"><img src="/avatars/{{avatar1}}"  class="img-thumbnail" style="width: 200px;"></a>
+                            </div>
                         </div>
                     {% end %}
                     {% if avatars.index(avatar) + 2 < len(avatars) %}
                         {% set avatar2 = avatars[avatars.index(avatar) + 2] %}
-                        <div class="span3">
-                            <center>
-                                <a href="#" class="boxavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-polaroid" style="width: 200px;"></a>
-                            </center>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <a href="#" class="boxavatarimg" value="{{avatar2}}"><img src="/avatars/{{avatar2}}"  class="img-thumbnail" style="width: 200px;"></a>
+                            </div>
                         </div>
                     {% end %}
                 </div>
@@ -64,23 +64,23 @@
         </div>
     </div>
     <!-- Edit Corporation -->
-    <div id="edit-corporation-modal" class="modal hide fade" style="display: none;">
+    <div id="edit-corporation-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-pencil"></i> {{ _("Edit Corporation") }}</h3>
         </div>
         <div class="modal-body">
-            <form id="edit-corporation-form" class="form-horizontal" method="post" action="/admin/edit/corporation">
+            <form id="edit-corporation-form" method="post" action="/admin/edit/corporation">
                 {% raw xsrf_form_html() %}
                 <input id="edit-corporation-uuid" name="uuid" value="" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="corporation_name">{{ _("Name") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="corporation_name">{{ _("Name") }}</label>
                     <div class="controls">
                         <input id="corporation-name" name="name" type="text" maxlength="32" placeholder="{{ _('Corporation Name') }}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="corporation_description">{{ _("Description") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="corporation_description">{{ _("Description") }}</label>
                     <div class="controls">
                         <textarea id="corporation-description" name="description" maxlength="512" type="text" placeholder="{{ _('Optional') }} {{ _('Description') }}"></textarea>
                     </div>
@@ -88,16 +88,16 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="edit-corporation-submit" class="btn btn-primary" type="button">
                 <i class="fa fa-save"></i>
                 {{_("Save")}}
             </button>
         </div>
     </div>
-    <div id="delete-corporation-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-corporation-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-times-circle-o"></i> {{ _("Delete Corporation") }}</h3>
         </div>
         <div class="modal-body">
@@ -112,7 +112,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="delete-corporation-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{ _("Delete") }}
@@ -120,24 +120,24 @@
         </div>
     </div>
     <!-- Edit Box -->
-    <div id="edit-box-modal" class="modal hide fade" style="display: none;">
+    <div id="edit-box-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-pencil"></i> {{ _("Edit Box") }}</h3>
             <div style="padding-left: 5px;">{{ _("Note: Files or documents for the challenge can be placed in the Game Materials.") }}</div>
         </div>
         <div class="modal-body">
-            <form id="edit-box-form" class="form-horizontal" method="post" action="/admin/edit/box" enctype="multipart/form-data">
+            <form id="edit-box-form" method="post" action="/admin/edit/box" enctype="multipart/form-data">
                 {% raw xsrf_form_html() %}
                 <input id="box-uuid" name="uuid" value="" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="box_name">{{ _("Box Name") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_name">{{ _("Box Name") }}</label>
                     <div class="controls">
                         <input id="box-name" name="name" type="text" placeholder="{{ _('Box Name') }}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box_corporation">{{ _("Corporation") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_corporation">{{ _("Corporation") }}</label>
                     <div class="controls">
                         <select id="edit-box-corporation" name="corporation_uuid">
                             {% for corporation in Corporation.all() %}
@@ -146,8 +146,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box_catetory">{{ _("Category") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_catetory">{{ _("Category") }}</label>
                     <div class="controls">
                         <select id="edit-box-category" name="category_uuid">
                             <option value=""></option>
@@ -157,8 +157,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="edit-box-operating_system">{{ _("System Type") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="edit-box-operating_system">{{ _("System Type") }}</label>
                     <div class="controls">
                         <select id="edit-box-operating_system" name="operating_system">
                             <option value="linux">
@@ -179,31 +179,31 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box-value">{% if options.banking %}{{ _("Reward") }}{% else %}{{ _("Points") }}{% end %}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box-value">{% if options.banking %}{{ _("Reward") }}{% else %}{{ _("Points") }}{% end %}</label>
                     <div class="controls">
                         <input id="box-value" name="value" type="number" pattern="[0-9]+" placeholder="{% if options.banking %}{{_('$')}} {{_('Reward')}}{% else %}{{_('Points')}}{% end %}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box_description">{{_("Description")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_description">{{_("Description")}}</label>
                     <div class="controls">
                         <textarea rows="4" class="toolbar" id="box-description" name="description" placeholder="{{_('Description')}}" ></textarea>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box_difficulty">{{_("Difficulty")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_difficulty">{{_("Difficulty")}}</label>
                     <div class="controls">
                         <input id="box-difficulty" name="difficulty" type="text" placeholder="{{_('Difficulty Rating')}}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="flag_submission_type">
+                <div class="mb-3">
+                    <label class="form-label" for="flag_submission_type">
                         {{ _("Flag Submission Type") }}
                     </label>
                     <div class="controls">
                         <input id="box-flag_submission_type" name="flag_submission_type" type="hidden" value="CLASSIC" />
-                        <div id="box-flag-submission-type-button" class="btn-group" data-toggle="buttons-radio">
+                        <div id="box-flag-submission-type-button" class="btn-group" data-bs-toggle="buttons-radio">
                             <button id="box-flag-submission-type-classic" type="button" class="btn btn-primary">
                                 <i id="box-flag-submission-type-classic-icon" class="fa fa-fw fa-square-o"></i>
                                 {{ _("Classic") }}
@@ -215,20 +215,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="box_avatar">{{ _("Avatar")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box_avatar">{{ _("Avatar")}}</label>
                     <div class="controls">
                         <a id="uploadbutton" class="btn btn-primary" href="#">{{ _("Upload") }}</a>
                         <input id="box-avatar" name="avatar" type="file" style="display: none;"/>
                         <input id="box_avatar_select" name="box_avatar_select" type="hidden" />
-                        {% if len(avatars) > 0 %}&nbsp;&nbsp;<a id="change_avatar_button" data-toggle="modal" class="btn btn-primary" href="#change-box-avatar-modal">{{_("Choose")}}</a>{% end %}
+                        {% if len(avatars) > 0 %}&nbsp;&nbsp;<a id="change_avatar_button" data-bs-toggle="modal" class="btn btn-primary" href="#change-box-avatar-modal">{{_("Choose")}}</a>{% end %}
                         &nbsp;&nbsp;<a id="removeavatar" class="btn btn-primary" href="#">{{ _("None")}}</a>
                         <div id="avatarfilename" style="padding: 5px;"></div>
                     </div>
                 </div>
                 {% if options.story_mode %}
-                <div class="control-group">
-                    <label class="control-label" for="box-capture_message">{{_("Capture Message")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="box-capture_message">{{_("Capture Message")}}</label>
                     <div class="controls">
                         <textarea rows="4" id="box-capture_message" name="capture_message" placeholder="({{_('Optional')}}">
                         </textarea>
@@ -238,16 +238,16 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="edit-box-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
             </button>
         </div>
     </div>
-    <div id="delete-box-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-box-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-times-circle-o"></i> {{_("Delete Box")}}</h3>
         </div>
         <div class="modal-body">
@@ -262,7 +262,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="delete-box-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete")}}
@@ -270,25 +270,25 @@
         </div>
     </div>
     <!-- Edit Flag -->
-    <div id="edit-flag-modal" class="modal hide fade" style="display: none; ">
+    <div id="edit-flag-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-pencil"></i> {{_("Edit Flag")}}</h3>
             <div style="padding-left: 5px;">{{_("Note: Files or documents for the challenge can be placed in the Game Materials.")}}</div>
         </div>
         <div class="modal-body">
-            <form id="edit-flag-form" class="form-horizontal" method="post" action="/admin/edit/flag">
+            <form id="edit-flag-form" method="post" action="/admin/edit/flag">
                 {% raw xsrf_form_html() %}
                 <input id="flag-uuid" name="uuid" type="hidden" />
                 <input id="flag-flagtype" name="flagtype" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="flag-name">{{_("Flag Name")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="flag-name">{{_("Flag Name")}}</label>
                     <div class="controls">
                         <input id="flag-name" maxlength="16" name="name" type="text" placeholder="({{_('Optional')}}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="edit-flag-box">{{_("Box")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="edit-flag-box">{{_("Box")}}</label>
                     <div class="controls">
                         <select id="edit-flag-box" name="box_uuid">
                             {% for box in Box.all() %}
@@ -297,8 +297,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="edit-flag-type">{{_("Flag Type")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="edit-flag-type">{{_("Flag Type")}}</label>
                     <div class="controls">
                         <select id="edit-flag-type" name="flag_type">
                             {% for item in FLAG_TYPES %}
@@ -309,23 +309,23 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="flag-value">{% if options.banking %}{{_("Reward")}}{% else %}{{_("Points")}}{% end %}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="flag-value">{% if options.banking %}{{_("Reward")}}{% else %}{{_("Points")}}{% end %}</label>
                     <div class="controls">
                         <input id="flag-value" name="value" type="number" placeholder="{% if options.banking %}($) {% end %}Reward Value" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="flag-description">{{_("Description")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="flag-description">{{_("Description")}}</label>
                     <div class="controls">
                         <textarea rows="4" class="toolbar" id="flag-description" name="description" type="text" placeholder="{{_('Description')}}"></textarea>
                     </div>
                 </div>
-                <div id="casegroup" class="control-group">
-                    <label class="control-label" for="case-sensitive">{{_("Case-Sensitive")}}</label>
+                <div id="casegroup" class="mb-3">
+                    <label class="form-label" for="case-sensitive">{{_("Case-Sensitive")}}</label>
                     <div class="controls">
                         <input id="flag-case-sensitive" name="case-sensitive" type="hidden" value=1 />
-                        <div id="case-button" class="btn-group" data-toggle="buttons-radio"
+                        <div id="case-button" class="btn-group" data-bs-toggle="buttons-radio"
                             rel="popover"
                             data-original-title="{{_('Case-Sensitive')}}"
                             data-content="{{_('Enabling this option will set the token to be case sensitive.  If this option is disabled, the answer token is case-insensitive.')}}">
@@ -340,14 +340,14 @@
                         </div>
                     </div>
                 </div>
-                <div id="flagtokengroup" class="control-group">
-                    <label class="control-label" for="flag-token">{{_("Token")}}</label>
+                <div id="flagtokengroup" class="mb-3">
+                    <label class="form-label" for="flag-token">{{_("Token")}}</label>
                     <div class="controls">
                         <input id="flag-token" name="token" type="text" maxlength="256" placeholder="{{_('Token Value')}}" />
                     </div>
                 </div>
-                <div id="testflaggroup" class="control-group">
-                    <label class="control-label" for="test_token">{{_("Test Flag")}}</label>
+                <div id="testflaggroup" class="mb-3">
+                    <label class="form-label" for="test_token">{{_("Test Flag")}}</label>
                     <div class="controls" style="position:relative;">
                         <span style="position: absolute; left: 230px; top: 3px; font-size: 175%;">
                             <i id="testtrue" class="fa fa-check" style="color: green; display: none;"></i>
@@ -359,10 +359,10 @@
                                 data-content="{{ _('This is a test flag/string the user could input for credit.')}}" />
                     </div>
                 </div>
-                <div id="choicegroup" class="control-group" style="margin-bottom: 10px;">
-                    <label class="control-label" for="token" style="margin-left: -20px;">{{_("Multiple Choice") }}</label>
+                <div id="choicegroup" class="mb-3" style="margin-bottom: 10px;">
+                    <label class="form-label" for="token" style="margin-left: -20px;">{{_("Multiple Choice") }}</label>
                     <div class="controls">
-                        <div class="input-group control-group after-add-more" style="position: relative; margin-bottom: 10px;">
+                        <div class="input-group mb-3 after-add-more" style="position: relative; margin-bottom: 10px;">
                             <input type="radio" name="multichoice" style="position: absolute; left: -22px; top: 4px;" required /><input type="text" name="choice" maxlength="256" class="form-control" placeholder="{{_('Enter Choice')}}">
                             <div class="input-group-btn" style="position: absolute; left: 228px; top: 0px;"> 
                                 <button class="btn btn-success add-more" type="button"style="padding: 4px 10px 0px; vertical-align: middle;"><i class="fa fa-plus" style="font-size: 160%;"></i></button>
@@ -371,23 +371,23 @@
                     </div>
                 </div>
                  <!-- Copy Fields -->
-                <div class="copy hide">
-                    <div class="choice-control-group input-group" style="margin-bottom: 10px; position: relative;">
+                <div class="copy d-none">
+                    <div class="choice-mb-3 input-group" style="margin-bottom: 10px; position: relative;">
                         <input type="radio" name="multichoice" style="position: absolute; left: -22px; top: 4px;" /><input type="text" name="choice" maxlength="256" class="form-control" placeholder="{{_('Enter Choice')}}">
                         <div class="input-group-btn" style="position: absolute; left: 228px; top: 0px;"> 
                             <button class="btn btn-danger remove" type="button" style="padding: 3px 10px 1px; vertical-align: middle;"><i class="fa fa-times" style="font-size: 160%;"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="edit-flag-lock">{{_("Dependent Flag")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="edit-flag-lock">{{_("Dependent Flag")}}</label>
                     <div class="controls">
                         <select id="edit-flag-lock" name="lock_uuid"></select>
                     </div>
                 </div>
                 {% if options.story_mode %}
-                <div class="control-group">
-                    <label class="control-label" for="flag-capture_message">{{_("Capture Message")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="flag-capture_message">{{_("Capture Message")}}</label>
                     <div class="controls">
                         <textarea rows="4" id="flag-capture_message" name="capture_message" placeholder="({{_('Optional')}}">
                         </textarea>
@@ -397,16 +397,16 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="edit-flag-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
             </button>
         </div>
     </div>
-    <div id="delete-flag-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-flag-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-times-circle-o"></i> {{_("Delete Flag")}}</h3>
         </div>
         <div class="modal-body">
@@ -419,7 +419,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="delete-flag-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{ _("Delete") }}
@@ -427,29 +427,29 @@
         </div>
     </div>
     <!-- Edit Hint -->
-    <div id="edit-hint-modal" class="modal hide fade" style="display: none; ">
+    <div id="edit-hint-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-pencil"></i> {{_("Edit Hint")}}</h3>
         </div>
         <div class="modal-body">
-            <form id="edit-hint-form" class="form-horizontal" method="post" action="/admin/edit/hint">
+            <form id="edit-hint-form" method="post" action="/admin/edit/hint">
                 {% raw xsrf_form_html() %}
                 <input id="hint-uuid" name="uuid" value="" type="hidden" />
-                <div class="control-group">
-                    <label class="control-label" for="hint-price">{% if options.banking %}{{_("Price")}}{% else %}{{_("Cost")}}{% end %}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="hint-price">{% if options.banking %}{{_("Price")}}{% else %}{{_("Cost")}}{% end %}</label>
                     <div class="controls">
                         <input id="hint-price" name="price" type="text" placeholder="{% if options.banking %}${% end %}" />
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="hint-description">{{_("Description")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="hint-description">{{_("Description")}}</label>
                     <div class="controls">
                         <textarea rows="4" class="toolbar" id="hint-description" name="description" type="text" maxlength="1024" placeholder="{{_('Description')}}"></textarea>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="hint-flag_uuid">{{_("Flag")}}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="hint-flag_uuid">{{_("Flag")}}</label>
                     <div class="controls">
                         <select id="hint-flag_uuid" name="hint-flag_uuid"></select>
                     </div>
@@ -457,16 +457,16 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="edit-hint-submit" class="btn btn-primary" type="button">
                 <i class="fa fa-fw fa-save"></i>
                 {{_("Save")}}
             </button>
         </div>
     </div>
-    <div id="delete-hint-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-hint-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-times-circle-o"></i> {{_("Delete Hint")}}</h3>
         </div>
         <div class="modal-body">
@@ -479,7 +479,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="delete-hint-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete") }}
@@ -487,25 +487,25 @@
         </div>
     </div>
     <!-- Add IP  -->
-    <div id="add-ip-address-modal" class="modal hide fade" style="display: none; ">
+    <div id="add-ip-address-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-fw fa-plus"></i>
                 {{_("Add IP address")}}
             </h3>
         </div>
         <div class="modal-body">
-        <form id="add-ip-address-form" class="form-horizontal" method="post" action="/admin/edit/ip">
+        <form id="add-ip-address-form" method="post" action="/admin/edit/ip">
             {% raw xsrf_form_html() %}
             <input id="add-ip-address-uuid" name="box_uuid" type="hidden" />
-            <div class="control-group">
-                <label class="control-label" for="ip-address">{{_("New IP Address")}}</label>
+            <div class="mb-3">
+                <label class="form-label" for="ip-address">{{_("New IP Address")}}</label>
                 <div class="controls">
                     <input autofocus id="ip-address" name="ip_address" type="text" placeholder="192.168.1.1" />
                 </div>
             </div>
-            <div class="control-group">
+            <div class="mb-3">
                 <div class="controls">
                     <label class="checkbox">
                         <input name="visible" value="true" type="checkbox" checked> {{_("Visible to Players")}}
@@ -515,7 +515,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="add-ip-address-submit" type="button" class="btn btn-primary">
                 <i class="fa fa-fw fa-plus"></i>
                 {{_("Add")}}
@@ -523,9 +523,9 @@
         </div>
     </div>
     <!-- Delete IP -->
-    <div id="delete-ip-address-modal" class="modal hide fade" style="display: none; ">
+    <div id="delete-ip-address-modal" class="modal fade" style="display: none; ">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete IP Address") }}
@@ -541,7 +541,7 @@
         </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="delete-ip-address-submit" type="button" class="btn btn-danger">
                 <i class="fa fa-fw fa-times-circle-o"></i>
                 {{_("Delete")}}
@@ -549,9 +549,9 @@
         </div>
     </div>
     <!-- View Details -->
-    <div id="details-flag-modal" class="modal hide fade" style="display: none; width:760px; margin-left:-380px;">
+    <div id="details-flag-modal" class="modal fade" style="display: none; width:760px; margin-left:-380px;">
         <div class="modal-header" style="padding-bottom: 0; margin-bottom: 0;">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-flag"></i> {{ _("Flag Details") }}<span id="flag_value" style="float: right; font-size: 80%; padding-right: 50px; margin-top: 6px;"></span></h3>
             <h5>
                 <table class="table">
@@ -612,9 +612,9 @@
         </div>
     </div>
     <!-- Accept Answer -->
-    <div id="details-answer-modal" class="modal hide fade" style="display: none; width:560px; margin-left:-280px;">
+    <div id="details-answer-modal" class="modal fade" style="display: none; width:560px; margin-left:-280px;">
         <div class="modal-header" style="padding-bottom: 0; margin-bottom: 0;">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3><i class="fa fa-fw fa-flag"></i> {{ _("Accept Answer") }}</h3>
             <h5>
                 <table class="table">
@@ -649,7 +649,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="stat-answer-submit" class="btn btn-primary" type="button">
                 <i class="fa fa-fw fa-save"></i>
                 {{ _("Save") }}
@@ -660,16 +660,16 @@
 
 {% block content %}
     <!-- Start Visible -->
-    <div class="row-fluid">
-        <div class="span2">
+    <div class="row">
+        <div class="col-md-2">
             <ul id="navWrapper" class="nav nav-tabs nav-stacked affix well">
                 {% if len(Corporation.all()) > 1 %}
-                    <center>
+                    <div class="text-center">
                         <strong>
                             <i class="fa fa-building-o"></i>
                             {{_("Corporations")}}
                         </strong>
-                    </center>
+                    </div>
                     <br />
                     {% for corporation in Corporation.all() %}
                         <li>
@@ -681,12 +681,12 @@
                     {% end %}
                 <br/>
                 {% end %}
-                <center>
+                <div class="text-center">
                     <strong>
                         <i class="fa fa-th"></i>
                         {{_("Boxes")}}
                     </strong>
-                </center>
+                </div>
                 <br />
                 {% for box in Box.all() %}
                     <li>
@@ -698,7 +698,7 @@
                 {% end %}
             </ul>
         </div>
-        <div class="span10">
+        <div class="col-md-10">
             <h1>
                 <i class="fa fa-bullseye"></i>
                 {{_("Target Management")}}
@@ -707,7 +707,7 @@
             {% if success is not None and len(success) != 0  %}
                 {% for message in success %}
                     <div class="alert alert-success">
-                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <h4 class="alert-heading">{{ _("SUCCESS") }}</h4>
                         {{ message }}
                     </div>
@@ -715,8 +715,8 @@
             {% end %}
             {% if errors != None and len(errors) != 0 %}
                 {% for error in errors %}
-                    <div class="alert alert-error">
-                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <div class="alert alert-danger">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <h4 class="alert-heading">{{_("ERROR")}}</h4>
                         {{ error }}
                     </div>
@@ -729,11 +729,11 @@
                             <i class="fa fa-fw fa-building-o"></i>
                             {{ corporation.name }}&nbsp;&nbsp;
                         </h2>
-                        <a id="edit-corporation-button{{ corp_index }}" class="btn btn-small" data-toggle="modal" href="#edit-corporation-modal" data-uuid="{{ corporation.uuid }}">
+                        <a id="edit-corporation-button{{ corp_index }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-corporation-modal" data-uuid="{{ corporation.uuid }}">
                             <i class="fa fa-fw fa-pencil"></i>
                             {{_("Edit Corporation")}}
                         </a>
-                        <a id="delete-corporation-button{{ corp_index }}" class="btn btn-small btn-danger" data-toggle="modal" href="#delete-corporation-modal" data-uuid="{{ corporation.uuid }}">
+                        <a id="delete-corporation-button{{ corp_index }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" href="#delete-corporation-modal" data-uuid="{{ corporation.uuid }}">
                             <i class="fa fa-fw fa-times-circle-o"></i>
                             {{_("Delete Corporation")}}
                         </a>
@@ -757,30 +757,30 @@
                                         {{ box.name }}&nbsp;&nbsp;
                                     </h3>
                                         {% if box.locked %}
-                                            <a id="lock-box-button-{{ box.uuid }}" class="btn btn-small btn-success" data-uuid="{{ box.uuid }}">
+                                            <a id="lock-box-button-{{ box.uuid }}" class="btn btn-sm btn-success" data-uuid="{{ box.uuid }}">
                                                 <i class="fa fa-fw fa-unlock"></i>
                                                 {{_("Unlock")}}
                                             </a>
                                         {% else %}
-                                            <a id="lock-box-button-{{ box.uuid }}" class="btn btn-small btn-warning" data-uuid="{{ box.uuid }}">
+                                            <a id="lock-box-button-{{ box.uuid }}" class="btn btn-sm btn-warning" data-uuid="{{ box.uuid }}">
                                                 <i class="fa fa-fw fa-lock"></i>
                                                 {{_("Lock")}}
                                             </a>
                                         {% end %}
-                                        <a id="edit-box-button-{{ box.uuid }}" class="btn btn-small" data-toggle="modal" href="#edit-box-modal" data-uuid="{{ box.uuid }}" data-corporation-uuid="{{ box.corporation.uuid }}">
+                                        <a id="edit-box-button-{{ box.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-box-modal" data-uuid="{{ box.uuid }}" data-corporation-uuid="{{ box.corporation.uuid }}">
                                             <i class="fa fa-pencil"></i>
                                             {{_("Edit Box")}}
                                         </a>
-                                        <a class="btn btn-small"  data-toggle="modal" href="/user/missions/boxes?uuid={{ box.uuid }}">
+                                        <a class="btn btn-sm"  data-bs-toggle="modal" href="/user/missions/boxes?uuid={{ box.uuid }}">
                                             <i class="fa fa-fw fa-eye"></i>
                                             {{_("View Box")}}
                                         </a>
-                                        <a id="delete-box-button-{{ box.uuid }}" class="btn btn-small btn-danger" data-toggle="modal" href="#delete-box-modal" data-uuid="{{ box.uuid }}">
+                                        <a id="delete-box-button-{{ box.uuid }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" href="#delete-box-modal" data-uuid="{{ box.uuid }}">
                                             <i class="fa fa-times-circle-o"></i>
                                             {{_("Delete Box")}}
                                         </a>
                                         {% if options.use_bots %}
-                                        <a style="float:right;" class="btn" data-toggle="modal" href="/admin/garbage?uuid={{ box.uuid }}" target="_blank">
+                                        <a style="float:right;" class="btn" data-bs-toggle="modal" href="/admin/garbage?uuid={{ box.uuid }}" target="_blank">
                                             <i class="fa fa-fw fa-trash-o"></i>
                                             {{ box.name }} Bot {{_("Garbage File") }}
                                         </a>
@@ -789,8 +789,8 @@
                                     <br />
                                     <div>                   
                                         {% if box.avatar != "none" %}
-                                        <div class="span4" style="margin: 0 30px 5px 5px;">
-                                            <img src="/avatars/{{ box.avatar }}" class="img-polaroid" />
+                                        <div class="col-md-4" style="margin: 0 30px 5px 5px;">
+                                            <img src="/avatars/{{ box.avatar }}" class="img-thumbnail" />
                                             <br /><br />
                                         </div>
                                         {% end %}
@@ -805,7 +805,7 @@
                                             <i class="fa fa-flag-o"></i>
                                             {{_("Flags on") }} {{ box.name }}&nbsp;&nbsp;&nbsp;
                                         </h4>
-                                        <a class="btn btn-primary btn-mini" data-toggle="modal" href="/admin/create/flag?box={{box.uuid}}">
+                                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="/admin/create/flag?box={{box.uuid}}">
                                             <i class="fa fa-plus"></i>
                                             {{_("Add Flags") }}
                                         </a>
@@ -841,24 +841,24 @@
                                                             <td class="shortcolumn" style="text-align: center;">{% if options.banking %}${% end %}{{ flag.value }}</td>
                                                             <td class="shortcolumn">{{ str(flag.type) }}</td>
                                                             <td class="shortcolumn" style="text-align: center;">
-                                                                <a id="flag-attachment-button-{{ flag.uuid }}" class="btn btn-mini" data-toggle="modal" href="#flag-attachment-button" data-uuid="{{ flag.uuid }}">
+                                                                <a id="flag-attachment-button-{{ flag.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#flag-attachment-button" data-uuid="{{ flag.uuid }}">
                                                                     {{ len(flag.flag_attachments) }}
                                                                 </a>
                                                             </td>
                                                             <td class="shortcolumn">
-                                                                <a id="details-flag-button-{{ flag.uuid }}" class="btn btn-mini" data-toggle="modal" href="#details-flag-modal" data-uuid="{{ flag.uuid }}" data-box-uuid="{{ flag.box.uuid }}" title="{{flag.token}}">
+                                                                <a id="details-flag-button-{{ flag.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#details-flag-modal" data-uuid="{{ flag.uuid }}" data-box-uuid="{{ flag.box.uuid }}" title="{{flag.token}}">
                                                                     <i class="fa fa-fw fa-eye"></i>
                                                                     {{ _("Details") }}
                                                                 </a>
                                                             </td>
                                                             <td class="shortcolumn">
-                                                                <a id="edit-flag-button-{{ flag.uuid }}" class="btn btn-mini" data-toggle="modal" href="#edit-flag-modal" data-flagtype="{{ str(flag._type) }}" data-uuid="{{ flag.uuid }}" data-box-uuid="{{ flag.box.uuid }}">
+                                                                <a id="edit-flag-button-{{ flag.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-flag-modal" data-flagtype="{{ str(flag._type) }}" data-uuid="{{ flag.uuid }}" data-box-uuid="{{ flag.box.uuid }}">
                                                                     <i class="fa fa-fw fa-pencil"></i>
                                                                     {{_("Edit Flag") }}
                                                                 </a>
                                                             </td>
                                                             <td class="shortcolumn">
-                                                                <a id="delete-flag-button-{{ flag.uuid }}" class="btn btn-danger btn-mini" data-toggle="modal" href="#delete-flag-modal" data-uuid="{{ flag.uuid }}">
+                                                                <a id="delete-flag-button-{{ flag.uuid }}" class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#delete-flag-modal" data-uuid="{{ flag.uuid }}">
                                                                     <i class="fa fa-fw fa-times-circle-o"></i>
                                                                     {{_("Delete")}}
                                                                 </a>
@@ -877,7 +877,7 @@
                                             <i class="fa fa-medkit"></i>
                                             {{_("Hints on")}} {{ box.name }}&nbsp;&nbsp;&nbsp;
                                         </h4>
-                                        <a class="btn btn-primary btn-mini" data-toggle="modal" href="/admin/create/hint?box={{box.uuid}}">
+                                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="/admin/create/hint?box={{box.uuid}}">
                                             <i class="fa fa-plus"></i>
                                             {{_("Add Hint")}}
                                         </a>
@@ -914,13 +914,13 @@
                                                             <td class="shortcolumn flagname" style="padding-right: 25px;">{{ Flag.by_id(hint.flag_id).name }}</td>
                                                             <td class="descriptioncol markdown">{{ hint.description }}</td>
                                                             <td class="shortcolumn">
-                                                                <a id="edit-hint-button-{{ hint.uuid }}" class="btn btn-mini" data-toggle="modal" href="#edit-hint-modal" data-uuid="{{ hint.uuid }}" data-box-uuid="{{ hint.box.uuid }}">
+                                                                <a id="edit-hint-button-{{ hint.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-hint-modal" data-uuid="{{ hint.uuid }}" data-box-uuid="{{ hint.box.uuid }}">
                                                                     <i class="fa fa-fw fa-pencil"></i>
                                                                     {{_("Edit Hint")}}
                                                                 </a>
                                                             </td>
                                                             <td class="shortcolumn">
-                                                                <a id="delete-hint-button-{{ hint.uuid }}" class="btn btn-danger btn-mini" data-toggle="modal" href="#delete-hint-modal" data-uuid="{{ hint.uuid }}">
+                                                                <a id="delete-hint-button-{{ hint.uuid }}" class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#delete-hint-modal" data-uuid="{{ hint.uuid }}">
                                                                     <i class="fa fa-fw fa-times-circle-o"></i>
                                                                     {{_("Delete")}}
                                                                 </a>
@@ -949,13 +949,13 @@
                                                             <td class="shortcolumn" style="text-align: center;">{% if options.banking %}{{_("$")}}{% end %}{{ hint.price }}</td>
                                                             <td class="descriptioncol markdown">{{ hint.description }}</td>
                                                             <td class="shortcolumn">
-                                                                <a id="edit-hint-button-{{ hint.uuid }}" class="btn btn-mini" data-toggle="modal" href="#edit-hint-modal" data-uuid="{{ hint.uuid }}" data-box-uuid="{{ hint.box.uuid }}">
+                                                                <a id="edit-hint-button-{{ hint.uuid }}" class="btn btn-sm" data-bs-toggle="modal" href="#edit-hint-modal" data-uuid="{{ hint.uuid }}" data-box-uuid="{{ hint.box.uuid }}">
                                                                     <i class="fa fa-fw fa-pencil"></i>
                                                                     {{_("Edit Hint")}}
                                                                 </a>
                                                             </td>
                                                             <td class="shortcolumn">
-                                                                <a id="delete-hint-button-{{ hint.uuid }}" class="btn btn-danger btn-mini" data-toggle="modal" href="#delete-hint-modal" data-uuid="{{ hint.uuid }}">
+                                                                <a id="delete-hint-button-{{ hint.uuid }}" class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#delete-hint-modal" data-uuid="{{ hint.uuid }}">
                                                                     <i class="fa fa-fw fa-times-circle-o"></i>
                                                                     {{_("Delete")}}
                                                                 </a>
@@ -975,7 +975,7 @@
                                             <i class="fa fa-fw fa-globe"></i>
                                             {{_("IP Address")}}&nbsp;&nbsp;
                                         </h4>
-                                        <a id="add-ip-address-button-{{ box.uuid }}" class="btn btn-primary btn-mini" data-toggle="modal" href="#add-ip-address-modal" data-uuid="{{ box.uuid }}">
+                                        <a id="add-ip-address-button-{{ box.uuid }}" class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#add-ip-address-modal" data-uuid="{{ box.uuid }}">
                                             <i class="fa fa-fw fa-plus"></i>
                                             {{_("Add IP Address")}}
                                         </a>
@@ -1000,7 +1000,7 @@
                                                             <td>{{ ip.version }}</td>
                                                             <td>{% if ip.visible %} {{_("Yes")}} {% else %} {{_("No")}} {% end %}</td>
                                                             <td class="shortcolumn">
-                                                                <a id="delete-ip-address-button-{{ ip.uuid }}" class="btn btn-danger btn-mini" data-toggle="modal" href="#delete-ip-address-modal" data-uuid="{{ ip.uuid }}">
+                                                                <a id="delete-ip-address-button-{{ ip.uuid }}" class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#delete-ip-address-modal" data-uuid="{{ ip.uuid }}">
                                                                     <i class="fa fa-fw fa-times-circle-o"></i>
                                                                     {{_("Delete")}}
                                                                 </a>
