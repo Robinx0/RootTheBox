@@ -22,18 +22,18 @@
 {% from handlers.MaterialsHandler import has_materials,has_box_materials %}
 {% from tornado.options import options %}
     <!-- Submit text flag -->
-    <div id="capture-text-flag-modal" class="modal hide fade" style="display: none;">
+    <div id="capture-text-flag-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{{ _("Submit Flag") }}</h3>
         </div>
         <div class="modal-body">
-            <form id="capture-text-flag-form" class="form-horizontal" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
+            <form id="capture-text-flag-form" class="" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
                 {% raw xsrf_form_html() %}
                 <input id="capture-text-flag-uuid" name="uuid" value="" type="hidden" />
                 <br />
-                <div class="control-group">
-                    <label class="control-label" for="flag-token">{{ _("Flag") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="flag-token">{{ _("Flag") }}</label>
                     <div class="controls">
                         <input autofocus required id="flag-token" name="token" type="text" placeholder="{{ _('Flag') }}" autocomplete="off" />
                     </div>
@@ -41,20 +41,20 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="capture-text-flag-submit" class="btn btn-primary" type="button">
                 {{ _("Submit") }}
             </button>
         </div>
     </div>
     <!-- Submit multiple choice flag -->
-    <div id="capture-choice-flag-modal" class="modal hide fade" style="display: none;">
+    <div id="capture-choice-flag-modal" class="modal fade" style="display: none;">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <h3>{{ _("Submit Flag") }}</h3>
             </div>
             <div class="modal-body">
-                <form id="capture-choice-flag-form" class="form-horizontal" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
+                <form id="capture-choice-flag-form" class="" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
                     {% raw xsrf_form_html() %}
                     <input id="capture-choice-flag-uuid" name="uuid" value="" type="hidden" />
                     <input id="choice-flag-token" name="token" type="hidden" />
@@ -63,25 +63,25 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+                <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
                 <button id="capture-choice-flag-submit" class="btn btn-primary" type="button">
                     {{ _("Submit") }}
                 </button>
             </div>
         </div>
     <!-- Submit file flag -->
-    <div id="capture-file-flag-modal" class="modal hide fade" style="display: none;">
+    <div id="capture-file-flag-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{{ _("Submit Flag") }}</h3>
         </div>
         <div class="modal-body">
-            <form id="capture-file-flag-form" class="form-horizontal" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}" enctype="multipart/form-data" >
+            <form id="capture-file-flag-form" class="" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}" enctype="multipart/form-data" >
                 {% raw xsrf_form_html() %}
                 <input autofocus id="capture-file-flag-uuid" name="uuid" type="hidden" />
-                <div class="control-group">
+                <div class="mb-3">
                     <br />
-                    <label class="control-label" for="flag-file">{{ _("Flag") }}</label>
+                    <label class="form-label" for="flag-file">{{ _("Flag") }}</label>
                     <div class="controls">
                         <input id="flag-file" name="flag" type="file" />
                     </div>
@@ -89,16 +89,16 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
             <button id="capture-file-flag-submit" class="btn btn-primary" type="button">
                 {{ _("Submit") }}
             </button>
         </div>
     </div>
 
-    <div id="show-flag-modal" class="modal hide fade" style="display: none;">
+    <div id="show-flag-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3 id="showknownname">{{ _("Flag") }}</h3>
         </div>
         <div class="modal-body">
@@ -106,25 +106,25 @@
             <h5 id="showknownflag" style="text-align: center;"></h5>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{ _("Close") }}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{ _("Close") }}</a>
         </div>
     </div>
     
-    <div id="purchase-hint-modal" class="modal hide fade" style="display: none;">
+    <div id="purchase-hint-modal" class="modal fade" style="display: none;">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>{% if options.banking %}{{ _("Purchase") }}{% else %}{{ _("Take") }}{% end %} {{ _("Hint") }}</h3>
         </div>
         <div class="modal-body">
             <br />
             <p id="purchase-hint-text"></p>
-            <form id="purchase-hint-form" class="form-horizontal" method="post" action="/user/missions/hint">
+            <form id="purchase-hint-form" class="" method="post" action="/user/missions/hint">
                 {% raw xsrf_form_html() %}
                 <input id="purchase-hint-uuid" name="uuid" value="" type="hidden" />
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="purchase-hint-submit" class="btn btn-primary" type="button">
                 {% if options.banking %}{{ _("Buy") }}{% else %}{{ _("Yes") }}{% end %}
             </button>
@@ -165,8 +165,8 @@
         </div><br />
         {% if errors is not None and len(errors) != 0 %}
             {% for error in errors %}
-                <div class="alert alert-error">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <div class="alert alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">{{ _("Incorrect") }}</h4>
                     {{ error }}
                 </div>
@@ -175,7 +175,7 @@
         {% if success is not None and len(success) != 0 %}
             {% for msg in success %}
                 <div class="alert alert-success">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">{{ _("Success!") }}</h4>
                     {{ msg }}
                 </div>
@@ -184,7 +184,7 @@
         {% if info is not None and len(info) != 0 %}
             {% for msg in info %}
                 <div class="alert alert-info">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">{{ _("Information") }}</h4>
                     {{ msg }}
                 </div>
@@ -194,8 +194,8 @@
             <div class="well">
                 <div>                   
                     {% if box.avatar != "none" %}
-                    <div class="span4" style="margin: 0 30px 5px 3px;">
-                        <img src="/avatars/{{ box.avatar }}" class="img-polaroid" />
+                    <div class="col-md-4" style="margin: 0 30px 5px 3px;">
+                        <img src="/avatars/{{ box.avatar }}" class="img-thumbnail" />
                         {% if has_materials() and not has_box_materials(box) %}
                             <a style="margin-top: 10px;" class="btn" href="/materials"><i class="fa fa-fw fa-folder-open-o"></i>
                             {{ _("Game Materials") }}</a>
@@ -245,12 +245,12 @@
 
         {% if box.flag_submission_type == FlagsSubmissionType.SINGLE_SUBMISSION_BOX %}
         <div id="capture-text-flag-box" class="well">
-            <form id="capture-text-flag-box-form" class="form-horizontal" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
+            <form id="capture-text-flag-box-form" class="" method="post" action="/user/missions/boxes?uuid={{ box.uuid }}">
                 {% raw xsrf_form_html() %}
                 <input id="capture-text-flag-box-box-id" name="box_id" value="{{ box.id }}" type="hidden" />
                 <h4>{{ _("Submit a Flag") }}</h4>
-                <div class="control-group">
-                    <label class="control-label" for="capture-text-flag-box-token">{{ _("Flag") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="capture-text-flag-box-token">{{ _("Flag") }}</label>
                     <div class="controls">
                         <input autofocus required id="capture-text-flag-box-token" name="token" type="text" placeholder="{{ _('Flag') }}" autocomplete="off" size="70" />
                         <button id="capture-text-flag-box-submit" class="btn btn-primary" type="submit">
@@ -319,7 +319,7 @@
                                                     {% if False and box.flag_submission_type != FlagsSubmissionType.SINGLE_SUBMISSION_BOX and penalty >= options.max_flag_attempts %}
                                                         {% break %}
                                                     {% elif not hint in team.hints %}
-                                                        <a id="purchase-flag-hint-button{{ index }}" class="btn btn-mini" data-toggle="modal" href="#purchase-hint-modal" data-price="{{ hint.price }}" data-uuid="{{ hint.uuid }}">
+                                                        <a id="purchase-flag-hint-button{{ index }}" class="btn btn-sm" data-bs-toggle="modal" href="#purchase-hint-modal" data-price="{{ hint.price }}" data-uuid="{{ hint.uuid }}">
                                                             {{ _("Hint") }} #{{i}}
                                                         </a>
                                                         {% set i += 1 %}
@@ -330,7 +330,7 @@
                                                 {% end %}
                                             {% end %}
                                         {% elif len(flag.capture_message) > 0 %}
-                                            <a class="btn btn-mini playstory" href="captured?flag={{ flag.uuid }}&reward={{ flag.value }}">
+                                            <a class="btn btn-sm playstory" href="captured?flag={{ flag.uuid }}&reward={{ flag.value }}">
                                                 <i class="fa fa-play"></i>
                                                 {{ _("Story") }}
                                             </a>
@@ -344,7 +344,7 @@
                                     {% else %}         
                                         <td class="shortcolumn">
                                             {% if box.flag_submission_type != FlagsSubmissionType.SINGLE_SUBMISSION_BOX or not flag.is_static %}
-                                            <a id="capture-{% if flag.is_file %}file{% elif flag.type == FLAG_CHOICE %}choice{% else %}text{%end%}-flag-button{{ index }}" class="btn btn-mini" data-toggle="modal" href="#capture-{% if flag.is_file %}file{% elif flag.type == FLAG_CHOICE %}choice{% else %}text{% end %}-flag-modal" 
+                                            <a id="capture-{% if flag.is_file %}file{% elif flag.type == FLAG_CHOICE %}choice{% else %}text{%end%}-flag-button{{ index }}" class="btn btn-sm" data-bs-toggle="modal" href="#capture-{% if flag.is_file %}file{% elif flag.type == FLAG_CHOICE %}choice{% else %}text{% end %}-flag-modal" 
                                             data-uuid="{{ flag.uuid }}" data-choices='{{ str(flag.choicelist()) }}'>
                                                 <i class="fa fa-flag"></i>
                                                 {{ _("Submit") }}
@@ -376,7 +376,7 @@
                                     <td style="border-top: 0px;"></td>
                                     <td style="border-top: 0px;">
                                         {% if options.show_captured_flag and team and flag in team.flags %}
-                                        <a style="float: right;" class="btn btn-mini showflag" data-toggle="modal" href="#show-flag-modal" 
+                                        <a style="float: right;" class="btn btn-sm showflag" data-bs-toggle="modal" href="#show-flag-modal" 
                                         data-flag="{{ flag.token }}" data-name="{{ flag.name }}">
                                             <i class="fa fa-flag"></i>
                                             {{ _("Flag") }}
@@ -466,7 +466,7 @@
                                         <td class="shortcolumn" style="text-align: center; padding-right: 20px;">{% if options.banking %}${% end %}{% if hint in team.hints or flagcount != len(box.flags) %}{{ hint.price }}{% else %}0{% end %}</td>
                                         <td>{{ _("Hint not yet taken") }}</td>
                                         <td class="shortcolumn">
-                                            <a id="purchase-hint-button{{ index }}" class="btn btn-mini" data-toggle="modal" href="#purchase-hint-modal" data-price="{{ hint.price }}" data-uuid="{{ hint.uuid }}">
+                                            <a id="purchase-hint-button{{ index }}" class="btn btn-sm" data-bs-toggle="modal" href="#purchase-hint-modal" data-price="{{ hint.price }}" data-uuid="{{ hint.uuid }}">
                                                 {% if options.banking %}{{ _("Purchase") }}{% else %}{{ _("Take Hint") }}{% end %}
                                             </a>
                                         </td>

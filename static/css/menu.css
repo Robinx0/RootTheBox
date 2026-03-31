@@ -1,16 +1,33 @@
-.btncollapse {
-    float: right;
+/* Bootstrap 5 Navbar Customizations */
+.navbar {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
-@media screen and (min-width: 980px) {
-    .btncollapse {display: none;}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
 }
-.dropdown-alert-menu {
-    min-width: 375px !important;
-    margin-left: -214px !important;
+
+.navbar-toggler:focus {
+    box-shadow: none;
 }
-.navbar .nav>li>.dropdown-alert-menu:before{
-    left:220px !important;
+
+/* Notification dropdown */
+.dropdown-menu[style*="min-width: 350px"] {
+    max-height: 400px;
+    overflow-y: auto;
 }
-.navbar .nav>li>.dropdown-alert-menu:after{
-    left:221px !important;
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 991px) {
+    .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    .dropdown-menu {
+        border: none;
+        background: transparent;
+        padding-left: 1rem;
+    }
 }

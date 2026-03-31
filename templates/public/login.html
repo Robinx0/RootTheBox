@@ -9,40 +9,55 @@
 
 {% block content %}
 <div class="container">
-    <form class="form-signin" action="/login" method="post">
-        <h3 class="form-signin-heading">
-            <i class="fa fa-lock"></i>
-            {{ _("Authentication Required") }}
-        </h3>
-        {% if errors is not None and len(errors) != 0 %}
-            {% for error in errors %}
-                <div class="alert alert-error" >
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
-                    <h4 class="alert-heading">{{ _("Authentication Failure") }}</h4>
-                    {{ error }}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">
+                        <i class="fa fa-lock"></i>
+                        {{ _("Authentication Required") }}
+                    </h3>
+                    {% if errors is not None and len(errors) != 0 %}
+                        {% for error in errors %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ _("Authentication Failure") }}</strong><br>
+                                {{ error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% end %}
+                    {% end %}
+                    {% if info is not None and len(info) != 0 %}
+                        {% for item in info %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>{{ _("Information") }}</strong><br>
+                                {{ item }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% end %}
+                    {% end %}
+                    <form action="/login" method="post">
+                        {% raw xsrf_form_html() %}
+                        <div class="mb-3">
+                            <input name="account" type="text" class="form-control form-control-lg" placeholder="{{ _('Handle') }}" autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <input name="password" type="password" class="form-control form-control-lg" placeholder="{{ _('Password') }}" autocomplete="off">
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="fa fa-sign-in"></i>
+                                {{ _("Login") }}
+                            </button>
+                        </div>
+                        {% if len(options.mail_host) > 0 %}
+                        <div class="text-end mt-3">
+                            <a href="/reset" class="text-decoration-none">{{ _('Forgot Password') }}</a>
+                        </div>
+                        {% end %}
+                    </form>
                 </div>
-            {% end %}
-        {% end %}
-        {% if info is not None and len(info) != 0 %}
-            {% for item in info %}
-                <div class="alert alert-info" >
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
-                    <h4 class="alert-heading">{{ _("Information") }}</h4>
-                    {{ item }}
-                </div>
-            {% end %}
-        {% end %}
-        {% raw xsrf_form_html() %}
-        <input name="account" type="text" class="input-block-level" placeholder="{{ _('Handle') }}" autofocus>
-        <input name="password" type="password" class="input-block-level" placeholder="{{ _('Password') }}" autocomplete="off">
-        <button class="btn btn-primary" type="submit">
-            <i class="fa fa-sign-in"></i>
-            {{ _("Login") }}
-        </button>
-        {% if len(options.mail_host) > 0 %}
-        <a href="/reset" style="float: right;">{{ _('Forgot Password') }}</a>
-        {% end %}
-    </form>
-</div> <!-- /container -->
-<br />
+            </div>
+        </div>
+    </div>
+</div>
 {% end %}

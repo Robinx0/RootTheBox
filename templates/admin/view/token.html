@@ -17,8 +17,8 @@
         </form>
         {% if errors != None and len(errors) != 0 %}
             {% for error in errors %}
-                <div class="alert alert-error">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <div class="alert alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <h4 class="alert-heading">{{ _("ERROR") }}</h4>
                         {{ error }}
                 </div>
@@ -42,7 +42,7 @@
                             <td>{{ token.value }}</td>
                             <td>{{ token.used }}</td>
                             <td>
-                                <a id="delete-token-button{{ index }}" class="btn btn-danger btn-mini" type="button" data-value="{{ token.value }}">
+                                <a id="delete-token-button{{ index }}" class="btn btn-danger btn-sm" type="button" data-value="{{ token.value }}">
                                     <i class="fa fa-fw fa-times-circle-o"></i>
                                     {{ _("Delete") }}
                                 </a>

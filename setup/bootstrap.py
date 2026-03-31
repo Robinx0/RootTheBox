@@ -80,6 +80,9 @@ css_files = [
     (u"Simplex", [u"simplex.min.css"]),
     (u"Spacelab", [u"spacelab.min.css"]),
     (u"Superhero", [u"superhero.min.css"]),
+    (u"Darkly", [u"darkly.min.css"]),
+    (u"Vapor", [u"vapor.min.css"]),
+    (u"Quartz", [u"quartz.min.css"]),
     (u"Geocities", [u"geocities.min.css"]),
     (u"386", [u"386.css", u"386.js", u"386.responsive.css"]),
 ]

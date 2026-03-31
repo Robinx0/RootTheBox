@@ -17,26 +17,26 @@
         <br />
         {% if errors is not None and len(errors) != 0 %}
             {% for error in errors %}
-                <div class="alert alert-error">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <div class="alert alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">{{ _("ERROR") }}</h4>
                     {{ error }}
                 </div>
             {% end %}
         {% end %}
-        <div class="span8 offset1 well" style="position: relative;">
+        <div class="col-md-8 offset-md-1 well" style="position: relative;">
         {% if not suspend %}
             <legend>
                 {{ _("Welcome to the Scene") }}
             </legend>
-            <form class="form-horizontal" action="/jointeam" method="post" enctype="multipart/form-data">
+            <form action="/jointeam" method="post" enctype="multipart/form-data">
                 {% raw xsrf_form_html() %}
                 <hr style="margin-right: 400px;">
                 <h5 style="margin-left: 20px; margin-bottom: 15px;">{{ _("Join Existing Team") }}</h5>
-                <div id="teammode-join" class="control-group">
-                    <label class="control-label" for="team-code">{{ _("Team Code") }}</label>
+                <div id="teammode-join" class="mb-3">
+                    <label class="form-label" for="team-code">{{ _("Team Code") }}</label>
                     <div class="controls">
-                        <input id="team-code" name="team-code" type="text" placeholder="{{ _('Team Code') }}"
+                        <input id="team-code" name="team-code" type="text" class="form-control" placeholder="{{ _('Team Code') }}"
                             rel="popover"
                             data-original-title="{{_('Team Code')}}"
                             data-content="{{_('Provide the code used to join an existing team.  Visible to other team members on their home page.')}}" >
@@ -46,10 +46,10 @@
                 <hr style="margin-right: 400px;">
 
                 {% if options.banking %}
-                <div class="control-group">
-                    <label class="control-label" for="bpass1">{{ _("Bank Account Password") }}</label>
+                <div class="mb-3">
+                    <label class="form-label" for="bpass1">{{ _("Bank Account Password") }}</label>
                     <div class="controls">
-                        <input required id="bpass" name="bpass" maxlength="{{ options.max_password_length }}" placeholder="{{ _('Bank Account Password') }}" type="password"
+                        <input required id="bpass" name="bpass" maxlength="{{ options.max_password_length }}" class="form-control" placeholder="{{ _('Bank Account Password') }}" type="password"
                             autocomplete="off"
                             rel="popover"
                             data-original-title="{{_('Password')}}"
@@ -58,8 +58,8 @@
                 </div>
                 {% end %}
                 {% if options.privacy_policy_link %}
-                    <div class="control-group">
-                        <label class="control-label" for="privacy_policy_accept">{{ _("I accept the") }} <a href="{{ options.privacy_policy_link }}">{{ _("Privacy Policy") }}</a></label>
+                    <div class="mb-3">
+                        <label class="form-label" for="privacy_policy_accept">{{ _("I accept the") }} <a href="{{ options.privacy_policy_link }}">{{ _("Privacy Policy") }}</a></label>
                         <div class="controls">
                             <input required id="privacy_policy_accept" name="privacy_policy_accept" type="checkbox" />
                         </div>
@@ -67,7 +67,7 @@
                 {% end %}
                 <br />
                 <input id="login-hint" name="login-hint" type="hidden" value="{{ login_hint }}" />
-                <div class="control-group">
+                <div class="mb-3">
                     <div class="controls">
                         <button class="btn btn-primary" type="submit">
                             {{ _("Join") }}

@@ -8,16 +8,18 @@
 
 {% block modals %}
 {% from tornado.options import options %}
-    <div id="unlock-game-level-modal" class="modal hide fade" style="display: none;">
+    <div id="unlock-game-level-modal" class="modal fade" style="display: none;">
+        <div class="modal-dialog">
+        <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3>
                 <i class="fa fa-unlock"></i>
                 {{ _("Unlock Level") }}
             </h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="unlock-game-level-form" class="form-horizontal" method="post" action="/user/missions/buyout">
+            <form id="unlock-game-level-form" method="post" action="/user/missions/buyout">
                 {% raw xsrf_form_html() %}
                 <input id="unlock-game-level-uuid" name="uuid" value="" type="hidden" />
             </form>
@@ -25,10 +27,12 @@
             </p>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">{{_("Close")}}</a>
+            <a href="#" class="btn" data-bs-dismiss="modal">{{_("Close")}}</a>
             <button id="unlock-game-level-submit" class="btn btn-primary" type="button">
                 {{ _("Unlock") }}
             </button>
+        </div>
+        </div>
         </div>
     </div>
 {% end %}
@@ -47,8 +51,8 @@
         <br />
         {% if errors is not None and len(errors) != 0 %}
             {% for error in errors %}
-            <div class="alert alert-error">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <div class="alert alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">{{ _("ERROR") }}</h4>
                     {{ error }}
             </div>
@@ -81,10 +85,10 @@
                     {% if team and has_level %}
                         <div class="progress" style="height: 10px; background-color: #424242;">
                         {% if len(level.flags) == 0 %}
-                            <div class="bar minibar" style="width: {{0}}%;" title="{{ len(team.level_flags(level.number)) }} / {{ len(level.flags) }}"></div>
+                            <div class="progress-bar minibar" style="width: {{0}}%;" title="{{ len(team.level_flags(level.number)) }} / {{ len(level.flags) }}"></div>
                         {% end %}
                         {% if len(level.flags) != 0 %}
-                            <div class="bar minibar" style="width: {{ ( len(team.level_flags(level.number)) /  float(len(level.flags)) ) * 100.0 }}%;" title="{{ len(team.level_flags(level.number)) }} / {{ len(level.flags) }}"></div>
+                            <div class="progress-bar minibar" style="width: {{ ( len(team.level_flags(level.number)) /  float(len(level.flags)) ) * 100.0 }}%;" title="{{ len(team.level_flags(level.number)) }} / {{ len(level.flags) }}"></div>
                         {% end %}
                         </div>
                     {% end %}
@@ -108,8 +112,8 @@
                         {% end %}
                         {% for box in boxes[::3] %}
                             <div class="row">
-                                <div class="span3">
-                                    <center>
+                                <div class="col-md-3">
+                                    <div class="text-center">
                                         <a href="/user/missions/boxes?uuid={{ box.uuid }}">
                                             <h5 style="margin-bottom: 6px;">
                                                 {% if box.operating_system.lower() == "windows" %}
@@ -134,22 +138,22 @@
                                                 {% end %}
                                                 <div class="progress" style="height: 8px; margin-bottom: 8px; margin-right: -10px; background-color: #424242;">
                                                     {% if flagcount != 0 and len(box.flags) != 0 %}
-                                                            <div class="bar minibar" style="width: {{ ( flagcount /  float(len(box.flags)) ) * 100.0 }}%;" title="{{ flagcount }} / {{ len(box.flags) }}"></div>
+                                                            <div class="progress-bar minibar" style="width: {{ ( flagcount /  float(len(box.flags)) ) * 100.0 }}%;" title="{{ flagcount }} / {{ len(box.flags) }}"></div>
                                                     {% else %}
-                                                            <div class="bar minibar" style="width: 0%;"></div>
+                                                            <div class="progress-bar minibar" style="width: 0%;"></div>
                                                     {% end %}
                                                 </div>
                                             {% end %}
                                             {% if box.avatar != "none" %}
-                                            <img src="/avatars/{{ box.avatar }}" class="img-polaroid" />
+                                            <img src="/avatars/{{ box.avatar }}" class="img-thumbnail" />
                                             {% end %}
                                         </a>
-                                    </center>
+                                    </div>
                                 </div>
                                 {% if boxes.index(box) + 1 < len(boxes) %}
                                     {% set box1 = boxes[boxes.index(box) + 1] %}
-                                    <div class="span3 offset1">
-                                        <center>
+                                    <div class="col-md-3 offset-md-1">
+                                        <div class="text-center">
                                             <a href="/user/missions/boxes?uuid={{ box1.uuid }}">
                                                 <h5 style="margin-bottom: 6px;">
                                                     {% if box1.operating_system.lower() == "windows" %}
@@ -174,23 +178,23 @@
                                                     {% end %}
                                                     <div class="progress" style="height: 8px; margin-bottom: 8px; margin-right: -10px; background-color: #424242;" title="{% if len(box1.flags) != 0 %}{{ flagcount }} / {{ len(box1.flags) }}{% else %}0 / 0{% end %}">
                                                         {% if flagcount != 0 and len(box1.flags) != 0 %}
-                                                                <div class="bar minibar" style="width: {{ ( flagcount /  float(len(box1.flags)) ) * 100.0 }}%;"></div>
+                                                                <div class="progress-bar minibar" style="width: {{ ( flagcount /  float(len(box1.flags)) ) * 100.0 }}%;"></div>
                                                         {% else %}
-                                                                <div class="bar minibar" style="width: 0%;"></div>
+                                                                <div class="progress-bar minibar" style="width: 0%;"></div>
                                                         {% end %}
                                                     </div>
                                                 {% end %}
                                                 {% if box1.avatar != "none" %}
-                                                <img src="/avatars/{{ box1.avatar }}" class="img-polaroid" />
+                                                <img src="/avatars/{{ box1.avatar }}" class="img-thumbnail" />
                                                 {% end %}
                                             </a>
-                                        </center>
+                                        </div>
                                     </div>
                                 {% end %}
                                 {% if boxes.index(box) + 2 < len(boxes) %}
                                     {% set box2 = boxes[boxes.index(box) + 2] %}
-                                    <div class="span3 offset1">
-                                        <center>
+                                    <div class="col-md-3 offset-md-1">
+                                        <div class="text-center">
                                             <a href="/user/missions/boxes?uuid={{ box2.uuid }}">
                                                 <h5 style="margin-bottom: 6px;">
                                                     {% if box2.operating_system.lower() == "windows" %}
@@ -215,17 +219,17 @@
                                                     {% end %}
                                                     <div class="progress" style="height: 8px; margin-bottom: 8px; margin-right: -10px; background-color: #424242;">
                                                         {% if flagcount != 0 and len(box2.flags) != 0 %}
-                                                                <div class="bar minibar" style="width: {{ ( flagcount /  float(len(box2.flags)) ) * 100.0 }}%;" title="{{ flagcount }} / {{ len(box2.flags) }}"></div>
+                                                                <div class="progress-bar minibar" style="width: {{ ( flagcount /  float(len(box2.flags)) ) * 100.0 }}%;" title="{{ flagcount }} / {{ len(box2.flags) }}"></div>
                                                         {% else %}
-                                                                <div class="bar minibar" style="width: 0%;"></div>
+                                                                <div class="progress-bar minibar" style="width: 0%;"></div>
                                                         {% end %}
                                                     </div>
                                                 {% end %}
                                                 {% if box2.avatar != "none" %}
-                                                <img src="/avatars/{{ box2.avatar }}" class="img-polaroid" />
+                                                <img src="/avatars/{{ box2.avatar }}" class="img-thumbnail" />
                                                 {% end %}
                                             </a>
-                                        </center>
+                                        </div>
                                     </div>
                                 {% end %}
                             </div>
@@ -234,7 +238,7 @@
                     </div>
                 {% else %}
                     {% if level._type == "buyout" %}
-                    <a id="unlock-game-level-button{{ index }}" class="btn" data-toggle="modal" href="#unlock-game-level-modal" data-uuid="{{ level.uuid }}" data-banking="{{ str(options.banking).lower() }}" data-buyout="{{ level.buyout }}">
+                    <a id="unlock-game-level-button{{ index }}" class="btn" data-bs-toggle="modal" href="#unlock-game-level-modal" data-uuid="{{ level.uuid }}" data-banking="{{ str(options.banking).lower() }}" data-buyout="{{ level.buyout }}">
                         <i class="fa fa-unlock"></i>
                         {{ _("Unlock") }}
                     </a>
