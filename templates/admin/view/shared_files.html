@@ -9,12 +9,14 @@
 {% from models.Team import Team %}
 {% from tornado.options import options %}
     <div id="delete-file-upload-modal" class="modal fade" style="display: none; ">
+        <div class="modal-dialog">
+        <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <h3>
                 <i class="fa fa-times-circle-o"></i>
                 {{ _("Delete File Upload") }}
             </h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
         <p>
@@ -31,6 +33,8 @@
                 <i class="fa fa-times-circle-o"></i>
                 {{ _("Delete") }}
             </button>
+        </div>
+        </div>
         </div>
     </div>
 {% end %}
@@ -66,7 +70,7 @@
                             <td>
                                 <label class="form-label" for="team-uuid">{% if options.teams %}{{_("Team")}}{% else %}{{_("Player")}}{% end %}</label>
                                 <div class="controls">
-                                    <select id="team-uuid" name="team_uuid">
+                                    <select class="form-control" id="team-uuid" name="team_uuid">
                                         <option value="all">All</option>
                                         {% for team in teams %}
                                             <option value="{{ team.uuid }}">{{ team.name }}</option>
@@ -107,15 +111,15 @@
                         {% else %}
                             <div class="accordion" id="accordion2">
                                 {% for share in shares %}
-                                    <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                            <a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#accordion2" href="#collapse{{ index }}">
+                                    <div class="accordion-item">
+                                        <div class="accordion-header">
+                                            <a class="accordion-button" data-bs-toggle="collapse" data-bs-parent="#accordion2" href="#collapse{{ index }}">
                                                 <strong>{{ share.file_name }}</strong>
                                                 &nbsp;&nbsp;&nbsp;{{ share.content_type }}
                                             </a>
                                         </div>
-                                        <div id="collapse{{ index }}" class="accordion-body collapse">
-                                            <div class="accordion-inner">
+                                        <div id="collapse{{ index }}" class="accordion-collapse collapse">
+                                            <div class="accordion-body">
                                                 <strong>{{ _("Created") }}: </strong> {{ share.created }}</strong>
                                                 <br />
                                                 <strong>{{ _("File Size") }}: </strong> {{ share.byte_size }} {{ _("bytes") }}
